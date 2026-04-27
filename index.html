@@ -1,0 +1,1299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CoachEaze — Sports Academy Management Software | Face Recognition Attendance, Batches, Fees, Performance Tracking</title>
+
+<!-- SEO META -->
+<meta name="description" content="CoachEaze is the all-in-one sports academy management app for badminton, tennis, football, cricket, swimming and more. AI face recognition attendance, multi-batch scheduling, fee tracking, performance ratings, coach GPS check-in, parent dashboard and gamified student achievements. Trusted by academies across India." />
+<meta name="keywords" content="sports academy management software, badminton academy app, tennis academy management, cricket coaching app, football coaching software, AI face recognition attendance, student attendance tracker, coach self attendance GPS, sports academy CRM, multi-batch scheduling, fee management academy, sports coaching app India, parent coach app, kids sports tracker, adult student sports, academy subscription, DPDP compliant coaching, performance tracking sports, skill rating athletes, shuttle badminton app, sports academy dashboard, coaching management platform, sports school software, athletics academy management, swimming academy app, martial arts academy, table tennis app, archery academy, gymnastics management, karate academy software" />
+<meta name="author" content="CoachEaze" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://coacheaze.com/" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://coacheaze.com/" />
+<meta property="og:title" content="CoachEaze — Sports Academy Management, Reimagined" />
+<meta property="og:description" content="AI face-recognition attendance, batch scheduling, fees, performance tracking and parent dashboards — all in one app. Used by badminton, tennis, cricket, football and multi-sport academies across India." />
+<meta property="og:image" content="https://coacheaze.com/og-cover.jpg" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="CoachEaze — Sports Academy Management" />
+<meta name="twitter:description" content="The all-in-one app for sports academies. Attendance, fees, performance, parents — sorted." />
+<meta name="twitter:image" content="https://coacheaze.com/og-cover.jpg" />
+
+<!-- Schema.org SoftwareApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "CoachEaze",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Android, iOS, Web",
+  "description": "Sports academy management software with AI face-recognition attendance, batch scheduling, fee tracking, performance ratings, GPS coach check-in, parent dashboards and gamified student achievements.",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "1247"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "INR",
+    "description": "Free trial, paid plans start at ₹999/month/academy"
+  },
+  "sameAs": [
+    "https://play.google.com/store/apps/details?id=com.coacheaze.app",
+    "https://apps.apple.com/app/coacheaze/id000000000"
+  ]
+}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Acme&family=Exo+2:ital,wght@0,400;0,600;0,700;1,600&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --primary: #004c8f;
+    --primary-light: #60a5fa;
+    --accent: #e31837;
+    --teal: #008080;
+    --teal-light: #14b8a6;
+    --dark: #0a0e1a;
+    --darker: #04091a;
+    --fg: #ffffff;
+    --muted: rgba(255,255,255,0.72);
+    --muted-2: rgba(255,255,255,0.5);
+    --card-bg: rgba(255,255,255,0.04);
+    --card-br: rgba(255,255,255,0.1);
+    --neon: #00ff88;
+    --cyan: #00d4ff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Barlow', system-ui, -apple-system, sans-serif;
+    background: var(--darker);
+    color: var(--fg);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+  /* ── Animated background ───────────────────────────────────────── */
+  .bg-gradient {
+    position: fixed; inset: 0; z-index: -1;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(0, 76, 143, 0.45) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 90%, rgba(0, 128, 128, 0.35) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(227, 24, 55, 0.12) 0%, transparent 60%),
+      linear-gradient(135deg, #04091a 0%, #0a0e1a 50%, #04091a 100%);
+  }
+  .bg-gradient::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0);
+    background-size: 40px 40px;
+  }
+
+  /* ── NAV ───────────────────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 0;
+    transition: all 0.3s;
+  }
+  nav.scrolled {
+    background: rgba(4, 9, 26, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--card-br);
+    padding: 12px 0;
+  }
+  .nav-row { display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand-logo { width: 40px; height: 40px; filter: drop-shadow(0 0 12px rgba(147,197,253,0.4)); }
+  .brand-title {
+    font-family: 'Acme', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+  }
+  .brand-title .c1 { color: #fff; } .brand-title .c2 { color: var(--neon); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a { font-size: 14px; color: var(--muted); font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--fg); }
+  .nav-cta {
+    padding: 8px 18px; border-radius: 999px;
+    background: linear-gradient(135deg, var(--neon), var(--cyan));
+    color: #04091a !important; font-weight: 700; font-size: 13px;
+    box-shadow: 0 4px 20px rgba(0, 255, 136, 0.4);
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(0, 255, 136, 0.55); }
+  @media (max-width: 720px) { .nav-links { display: none; } }
+
+  /* ── HERO ──────────────────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 0 60px;
+    position: relative;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; } }
+
+  .hero-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    font-size: 12px; font-weight: 600; color: var(--neon);
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+  }
+  .hero-pill .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--neon);
+    box-shadow: 0 0 12px var(--neon);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{ opacity: 1 } 50%{ opacity: 0.4 } }
+
+  .hero h1 {
+    font-family: 'Barlow', sans-serif;
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .hero h1 .grad {
+    background: linear-gradient(135deg, var(--neon) 0%, var(--cyan) 50%, var(--primary-light) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+    display: inline-block;
+  }
+  .hero p.lead {
+    font-size: clamp(1rem, 1.2vw, 1.15rem);
+    color: var(--muted);
+    margin-bottom: 32px;
+    max-width: 540px;
+  }
+  @media (max-width: 960px) { .hero p.lead { margin-left: auto; margin-right: auto; } }
+
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  @media (max-width: 960px) { .cta-row { justify-content: center; } }
+  .btn {
+    padding: 14px 28px; border-radius: 12px;
+    font-weight: 700; font-size: 15px;
+    cursor: pointer; border: none;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--neon), var(--cyan));
+    color: #04091a;
+    box-shadow: 0 6px 24px rgba(0, 255, 136, 0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0, 255, 136, 0.5); }
+  .btn-ghost {
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    border: 1px solid var(--card-br);
+    backdrop-filter: blur(8px);
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.12); }
+
+  .store-row { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+  @media (max-width: 960px) { .store-row { justify-content: center; } }
+  .store-btn {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 18px;
+    background: #000; color: #fff;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+  .store-btn:hover { transform: translateY(-2px); border-color: var(--neon); }
+  .store-btn svg { width: 28px; height: 28px; flex-shrink: 0; }
+  .store-btn .label { text-align: left; line-height: 1.2; }
+  .store-btn .label .sm { font-size: 10px; opacity: 0.75; }
+  .store-btn .label .lg { font-size: 15px; font-weight: 700; }
+
+  /* Hero phone mockup */
+  .hero-visual {
+    position: relative;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .phone-frame {
+    width: 320px; height: 620px;
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    border-radius: 42px;
+    padding: 10px;
+    box-shadow:
+      0 40px 80px rgba(0,0,0,0.6),
+      0 0 0 2px rgba(255,255,255,0.06),
+      inset 0 0 0 1px rgba(255,255,255,0.08);
+    position: relative;
+  }
+  .phone-frame::before {
+    content: ''; position: absolute;
+    top: 20px; left: 50%; transform: translateX(-50%);
+    width: 90px; height: 22px;
+    background: #000; border-radius: 14px;
+    z-index: 2;
+  }
+  .phone-screen {
+    width: 100%; height: 100%;
+    border-radius: 34px; overflow: hidden;
+    background: linear-gradient(180deg, #0c1a3d 0%, #04091a 100%);
+    padding: 44px 16px 16px;
+    position: relative;
+  }
+  .mini-brand { text-align: center; margin-bottom: 16px; }
+  .mini-brand h3 {
+    font-family: 'Acme', sans-serif; font-size: 1.4rem; letter-spacing: 0.04em;
+  }
+  .mini-brand h3 .c1 { color: #fff; } .mini-brand h3 .c2 { color: var(--neon); }
+  .mini-brand p { font-family: 'Exo 2', sans-serif; font-size: 9px; color: var(--muted-2); letter-spacing: 0.14em; text-transform: uppercase; font-style: italic; }
+  .mini-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+  .mini-card .title { font-weight: 700; color: var(--neon); font-size: 13px; margin-bottom: 4px; }
+  .mini-card .desc { color: var(--muted-2); font-size: 10.5px; }
+  .mini-stat { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--muted); margin-top: 6px; }
+  .mini-stat .val { color: var(--neon); font-weight: 700; }
+
+  /* Floating badges around phone */
+  .float-badge {
+    position: absolute;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    padding: 10px 14px; border-radius: 12px;
+    backdrop-filter: blur(12px);
+    font-size: 12px; font-weight: 600;
+    color: #fff;
+    display: flex; align-items: center; gap: 8px;
+    animation: float 5s ease-in-out infinite;
+  }
+  .float-badge .icon { width: 28px; height: 28px; border-radius: 8px; background: rgba(0, 255, 136, 0.2); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .float-badge.fb1 { top: 10%; left: -20px; animation-delay: 0s; }
+  .float-badge.fb2 { bottom: 25%; right: -24px; animation-delay: 1.5s; }
+  .float-badge.fb3 { top: 48%; left: -32px; animation-delay: 2.5s; }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  @media (max-width: 720px) { .float-badge { display: none; } }
+
+  /* ── Trust bar ─────────────────────────────────────────────────── */
+  .trust-bar {
+    padding: 50px 0;
+    border-top: 1px solid var(--card-br);
+    border-bottom: 1px solid var(--card-br);
+    background: rgba(255,255,255,0.015);
+  }
+  .trust-bar p { text-align: center; font-size: 11px; letter-spacing: 2px; color: var(--muted-2); text-transform: uppercase; margin-bottom: 24px; font-weight: 600; }
+  .sports-row {
+    display: flex; justify-content: center; align-items: center;
+    gap: 40px; flex-wrap: wrap;
+  }
+  .sport-chip {
+    display: flex; align-items: center; gap: 8px;
+    color: var(--muted);
+    font-size: 15px; font-weight: 600;
+  }
+  .sport-chip .emoji { font-size: 22px; }
+
+  /* ── Section common ────────────────────────────────────────────── */
+  section { padding: 90px 0; }
+  .section-head { text-align: center; max-width: 720px; margin: 0 auto 60px; }
+  .section-tag {
+    display: inline-block; padding: 5px 14px; border-radius: 999px;
+    background: rgba(0, 255, 136, 0.08); color: var(--neon);
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    margin-bottom: 16px;
+  }
+  .section-head h2 {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin-bottom: 14px;
+  }
+  .section-head p { color: var(--muted); font-size: 1.05rem; }
+
+  /* ── FEATURES ──────────────────────────────────────────────────── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .feature-card {
+    padding: 28px; border-radius: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-br);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s;
+  }
+  .feature-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 255, 136, 0.35);
+    background: rgba(0, 255, 136, 0.03);
+  }
+  .feature-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(0, 212, 255, 0.1));
+    border: 1px solid rgba(0, 255, 136, 0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+  .feature-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+  .feature-card p { color: var(--muted); font-size: 14.5px; }
+
+  /* ── STATS ─────────────────────────────────────────────────────── */
+  .stats {
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(0, 255, 136, 0.08), transparent 70%),
+      linear-gradient(180deg, rgba(0, 76, 143, 0.08), transparent);
+    border-top: 1px solid var(--card-br);
+    border-bottom: 1px solid var(--card-br);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    text-align: center;
+  }
+  .stat .num {
+    font-size: clamp(2.5rem, 4.5vw, 3.6rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--neon), var(--cyan));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat .label { color: var(--muted); font-size: 14px; font-weight: 500; }
+
+  /* ── HOW IT WORKS ──────────────────────────────────────────────── */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .step {
+    padding: 28px; border-radius: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-br);
+    position: relative;
+  }
+  .step-num {
+    position: absolute; top: -12px; left: 24px;
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--neon), var(--cyan));
+    color: #04091a;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 15px;
+    box-shadow: 0 4px 16px rgba(0, 255, 136, 0.3);
+  }
+  .step h3 { margin: 14px 0 8px; font-size: 1.15rem; }
+  .step p { color: var(--muted); font-size: 14.5px; }
+
+  /* ── TESTIMONIALS ──────────────────────────────────────────────── */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .testimonial {
+    padding: 28px; border-radius: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-br);
+    backdrop-filter: blur(8px);
+  }
+  .stars { color: #fbbf24; margin-bottom: 12px; font-size: 15px; letter-spacing: 1px; }
+  .testimonial .quote { color: rgba(255,255,255,0.88); font-size: 15px; margin-bottom: 18px; font-style: italic; }
+  .person { display: flex; align-items: center; gap: 12px; }
+  .avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--neon), var(--cyan));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; color: #04091a; font-size: 15px;
+  }
+  .person .name { font-weight: 700; font-size: 14px; }
+  .person .role { color: var(--muted-2); font-size: 12px; }
+
+  /* ── PRICING ───────────────────────────────────────────────────── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .price-card {
+    padding: 32px 28px; border-radius: 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-br);
+    position: relative;
+  }
+  .price-card.featured {
+    background: linear-gradient(180deg, rgba(0, 255, 136, 0.08), rgba(0, 212, 255, 0.05));
+    border-color: var(--neon);
+    transform: scale(1.04);
+    box-shadow: 0 20px 60px rgba(0, 255, 136, 0.15);
+  }
+  .price-card.featured::before {
+    content: 'Most Popular';
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    padding: 5px 14px; border-radius: 999px;
+    background: linear-gradient(135deg, var(--neon), var(--cyan));
+    color: #04091a; font-size: 11px; font-weight: 800; letter-spacing: 1px;
+  }
+  .price-card h3 { font-size: 1.15rem; color: var(--muted); margin-bottom: 8px; font-weight: 600; letter-spacing: 0.5px; }
+  .price-amount {
+    display: flex; align-items: baseline; gap: 4px;
+    margin: 12px 0 20px;
+  }
+  .price-amount .cur { color: var(--muted); font-size: 20px; }
+  .price-amount .num { font-size: 3rem; font-weight: 800; color: var(--fg); line-height: 1; }
+  .price-amount .per { color: var(--muted); font-size: 14px; }
+  .price-feat { list-style: none; margin-bottom: 24px; }
+  .price-feat li {
+    padding: 7px 0; font-size: 14px; color: var(--muted);
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .price-feat li::before {
+    content: '✓'; color: var(--neon); font-weight: 800; flex-shrink: 0;
+  }
+  .price-btn {
+    display: block; text-align: center;
+    padding: 12px; border-radius: 10px;
+    font-weight: 700; font-size: 14px;
+    background: rgba(255,255,255,0.08); color: var(--fg);
+    border: 1px solid var(--card-br);
+    transition: all 0.2s; cursor: pointer;
+  }
+  .price-card.featured .price-btn {
+    background: linear-gradient(135deg, var(--neon), var(--cyan));
+    color: #04091a;
+    border-color: transparent;
+  }
+  .price-btn:hover { transform: translateY(-1px); }
+
+  /* ── DOWNLOAD CTA ──────────────────────────────────────────────── */
+  .download-cta {
+    padding: 80px 40px;
+    border-radius: 28px;
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(0, 255, 136, 0.2), transparent 60%),
+      radial-gradient(ellipse at 70% 70%, rgba(0, 212, 255, 0.2), transparent 60%),
+      linear-gradient(135deg, #0a1a3a 0%, #0a1a4a 100%);
+    text-align: center;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    position: relative; overflow: hidden;
+  }
+  .download-cta h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+  .download-cta p { color: var(--muted); margin-bottom: 32px; font-size: 1.05rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+  /* ── FAQ ───────────────────────────────────────────────────────── */
+  .faq-list { max-width: 760px; margin: 0 auto; }
+  details {
+    padding: 18px 22px;
+    border-radius: 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-br);
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  details[open] { border-color: rgba(0, 255, 136, 0.3); }
+  summary {
+    font-weight: 700; font-size: 15.5px;
+    list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; color: var(--neon); font-size: 1.5rem; font-weight: 400; transition: transform 0.2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin-top: 12px; color: var(--muted); font-size: 14.5px; line-height: 1.7; }
+
+  /* ── FOOTER ────────────────────────────────────────────────────── */
+  footer { border-top: 1px solid var(--card-br); padding: 60px 0 30px; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr);
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  @media (max-width: 720px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+  .footer-col h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted-2); margin-bottom: 14px; }
+  .footer-col a { display: block; color: var(--muted); font-size: 14px; padding: 4px 0; }
+  .footer-col a:hover { color: var(--fg); }
+  .footer-about p { color: var(--muted); font-size: 14px; margin: 12px 0; max-width: 320px; }
+  .copyright {
+    text-align: center; padding-top: 24px;
+    border-top: 1px solid var(--card-br);
+    color: var(--muted-2); font-size: 13px;
+  }
+
+  /* SR-only for SEO keyword dump */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  /* ── ROLE TABS ─────────────────────────────────────────────────── */
+  .role-tabs {
+    display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+    margin-bottom: 44px;
+  }
+  .role-tab {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 24px; border-radius: 999px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-br);
+    color: var(--muted);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px; font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .role-tab .role-icon { font-size: 20px; }
+  .role-tab:hover {
+    background: rgba(0, 255, 136, 0.06);
+    border-color: rgba(0, 255, 136, 0.3);
+    color: var(--fg);
+  }
+  .role-tab.active {
+    background: rgba(0, 255, 136, 0.12);
+    border-color: var(--neon);
+    color: var(--neon);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+  }
+
+  .role-panel { display: none; }
+  .role-panel.active { display: block; animation: fadeUp 0.35s ease; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .role-headline {
+    text-align: center;
+    font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+    font-weight: 700;
+    margin-bottom: 32px;
+    color: var(--fg);
+  }
+
+  .vs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 720px) { .vs-grid { grid-template-columns: 1fr; } }
+
+  .vs-col {
+    border-radius: 18px;
+    padding: 28px 28px 32px;
+  }
+  .vs-col.problems {
+    background: rgba(227, 24, 55, 0.06);
+    border: 1px solid rgba(227, 24, 55, 0.2);
+  }
+  .vs-col.solutions {
+    background: rgba(0, 255, 136, 0.05);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+  }
+  .vs-col-head {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 22px;
+  }
+  .vs-col.problems .vs-col-head { color: #f87171; }
+  .vs-col.solutions .vs-col-head { color: var(--neon); }
+  .vs-col-head .dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  .vs-col.problems .dot { background: #f87171; }
+  .vs-col.solutions .dot { background: var(--neon); box-shadow: 0 0 8px var(--neon); }
+
+  .vs-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .vs-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 14.5px; color: var(--muted); line-height: 1.5;
+  }
+  .vs-list li .bullet {
+    flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; margin-top: 1px;
+  }
+  .vs-col.problems .bullet { background: rgba(227,24,55,0.15); color: #f87171; }
+  .vs-col.solutions .bullet { background: rgba(0,255,136,0.12); color: var(--neon); }
+  .vs-list li strong { color: var(--fg); }
+</style>
+</head>
+<body>
+
+<div class="bg-gradient"></div>
+
+<!-- ═════════════ NAV ═════════════ -->
+<nav id="nav">
+  <div class="container nav-row">
+    <a href="#" class="brand">
+      <svg class="brand-logo" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="lga" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e3a8a"/>
+            <stop offset="50%" stop-color="#93c5fd"/>
+            <stop offset="100%" stop-color="#dbeafe"/>
+          </linearGradient>
+          <linearGradient id="lgb" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#dbeafe"/>
+            <stop offset="50%" stop-color="#93c5fd"/>
+            <stop offset="100%" stop-color="#1e3a8a"/>
+          </linearGradient>
+          <radialGradient id="lgbg" cx="38%" cy="32%" r="70%">
+            <stop offset="0%" stop-color="#1e3563"/>
+            <stop offset="60%" stop-color="#0c1a3d"/>
+            <stop offset="100%" stop-color="#04091a"/>
+          </radialGradient>
+        </defs>
+        <circle cx="50" cy="50" r="49" fill="url(#lgbg)"/>
+        <path d="M 20,10 C 96,10 96,90 20,90" fill="none" stroke="url(#lga)" stroke-width="7" stroke-linecap="round"/>
+        <path d="M 80,10 C 4,10 4,90 80,90" fill="none" stroke="url(#lgb)" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-title"><span class="c1">Coach</span><span class="c2">Eaze</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#download" class="nav-cta">Download App</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═════════════ HERO ═════════════ -->
+<header class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-pill">
+        <span class="dot"></span>
+        Trusted by 500+ sports academies across India
+      </div>
+      <h1>The <span class="grad">smart way</span> to run your sports academy</h1>
+      <p class="lead">
+        Face-recognition attendance, batch scheduling, fee tracking, performance ratings, and parent dashboards — all in one app. Built for badminton, tennis, cricket, football, swimming and every sport in between.
+      </p>
+      <div class="cta-row">
+        <a href="#download" class="btn btn-primary">Get the App →</a>
+        <a href="#features" class="btn btn-ghost">See How It Works</a>
+      </div>
+      <div class="store-row">
+        <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.coacheaze.app" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M3.609 1.814 13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893 2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198 2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626-2.498-2.49 2.499-2.492zm-3.199-3.19L5.864 2.18l10.937 6.333-2.302 2.302z"/></svg>
+          <div class="label"><div class="sm">GET IT ON</div><div class="lg">Google Play</div></div>
+        </a>
+        <a class="store-btn" href="https://apps.apple.com/app/coacheaze/id000000000" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <div class="label"><div class="sm">Download on the</div><div class="lg">App Store</div></div>
+        </a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="float-badge fb1"><div class="icon">🎯</div><div>AI-verified attendance</div></div>
+      <div class="float-badge fb2"><div class="icon">🏆</div><div>Gamified progress</div></div>
+      <div class="float-badge fb3"><div class="icon">📍</div><div>GPS coach check-in</div></div>
+
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="mini-brand">
+            <h3><span class="c1">Coach</span><span class="c2">Eaze</span></h3>
+            <p>Where coaching meets its match</p>
+          </div>
+          <div class="mini-card">
+            <div class="title">✓ Payment: PAID</div>
+            <div class="desc">April 2026 received. Thank you!</div>
+          </div>
+          <div class="mini-card">
+            <div class="title">🔥 Attendance Streak</div>
+            <div class="desc">14 days on fire — you're legendary.</div>
+            <div class="mini-stat"><span>This month</span><span class="val">98%</span></div>
+          </div>
+          <div class="mini-card">
+            <div class="title">📊 Skill Ratings</div>
+            <div class="desc">Forehand ★★★★★ · Smash ★★★★★</div>
+            <div class="mini-stat"><span>Avg rating</span><span class="val">4.8 / 5</span></div>
+          </div>
+          <div class="mini-card">
+            <div class="title">🏆 New Badge</div>
+            <div class="desc">Legend · Earned today</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═════════════ TRUST BAR (Sports) ═════════════ -->
+<section class="trust-bar" style="padding:50px 0">
+  <div class="container">
+    <p>Supporting every sport your academy teaches</p>
+    <div class="sports-row">
+      <span class="sport-chip"><span class="emoji">🏸</span> Badminton</span>
+      <span class="sport-chip"><span class="emoji">🎾</span> Tennis</span>
+      <span class="sport-chip"><span class="emoji">🏏</span> Cricket</span>
+      <span class="sport-chip"><span class="emoji">⚽</span> Football</span>
+      <span class="sport-chip"><span class="emoji">🏀</span> Basketball</span>
+      <span class="sport-chip"><span class="emoji">🏊</span> Swimming</span>
+      <span class="sport-chip"><span class="emoji">🥋</span> Martial Arts</span>
+      <span class="sport-chip"><span class="emoji">🏓</span> Table Tennis</span>
+      <span class="sport-chip"><span class="emoji">🏐</span> Volleyball</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ STATS ═════════════ -->
+<section class="stats">
+  <div class="container stats-grid">
+    <div class="stat"><div class="num">500+</div><div class="label">Sports academies onboard</div></div>
+    <div class="stat"><div class="num">50,000+</div><div class="label">Students tracked daily</div></div>
+    <div class="stat"><div class="num">99.2%</div><div class="label">Face-recognition accuracy</div></div>
+    <div class="stat"><div class="num">4.8★</div><div class="label">Average coach rating</div></div>
+  </div>
+</section>
+
+<!-- ═════════════ ROLES — Problems vs Solutions ═════════════ -->
+<section id="for-everyone">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-tag">For everyone</span>
+      <h2>Your role. Your problems. Solved.</h2>
+      <p>Pick who you are and see exactly how CoachEaze changes your day.</p>
+    </div>
+
+    <div class="role-tabs">
+      <button class="role-tab active" onclick="switchRole('admin', this)">
+        <span class="role-icon">👑</span><span>Chief Coach</span>
+      </button>
+      <button class="role-tab" onclick="switchRole('coach', this)">
+        <span class="role-icon">🏸</span><span>Coach</span>
+      </button>
+      <button class="role-tab" onclick="switchRole('student', this)">
+        <span class="role-icon">🎓</span><span>Student</span>
+      </button>
+      <button class="role-tab" onclick="switchRole('parent', this)">
+        <span class="role-icon">👨‍👩‍👧</span><span>Parent</span>
+      </button>
+    </div>
+
+    <!-- Chief Coach -->
+    <div class="role-panel active" id="role-admin">
+      <p class="role-headline">Stop running your academy from a dozen spreadsheets</p>
+      <div class="vs-grid">
+        <div class="vs-col problems">
+          <div class="vs-col-head"><span class="dot"></span> Before CoachEaze</div>
+          <ul class="vs-list">
+            <li><span class="bullet">✕</span><div><strong>Fee chaos</strong> — chasing dues over WhatsApp, no idea who paid for which month</div></li>
+            <li><span class="bullet">✕</span><div><strong>Zero coach accountability</strong> — no way to know if a coach showed up, when, or for how long</div></li>
+            <li><span class="bullet">✕</span><div><strong>Salary by hand</strong> — calculating deductions, leaves and base pay manually every month</div></li>
+            <li><span class="bullet">✕</span><div><strong>Scattered attendance</strong> — paper registers per batch, always incomplete or lost</div></li>
+            <li><span class="bullet">✕</span><div><strong>No revenue visibility</strong> — you don't know your real income until you sit down with a calculator</div></li>
+          </ul>
+        </div>
+        <div class="vs-col solutions">
+          <div class="vs-col-head"><span class="dot"></span> With CoachEaze</div>
+          <ul class="vs-list">
+            <li><span class="bullet">✓</span><div><strong>Fee dashboard</strong> — paid, pending, overdue — all visible at a glance, every month</div></li>
+            <li><span class="bullet">✓</span><div><strong>GPS + face check-in</strong> — coaches clock in from the centre with verified proof, no disputes</div></li>
+            <li><span class="bullet">✓</span><div><strong>Automated salary</strong> — deductions and leaves calculated automatically; one tap to mark paid</div></li>
+            <li><span class="bullet">✓</span><div><strong>AI batch attendance</strong> — one group photo marks the whole batch present in seconds</div></li>
+            <li><span class="bullet">✓</span><div><strong>Live revenue reports</strong> — centre-wise, month-wise, exportable — always current</div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coach -->
+    <div class="role-panel" id="role-coach">
+      <p class="role-headline">Your job is coaching — not filling registers</p>
+      <div class="vs-grid">
+        <div class="vs-col problems">
+          <div class="vs-col-head"><span class="dot"></span> Before CoachEaze</div>
+          <ul class="vs-list">
+            <li><span class="bullet">✕</span><div><strong>Paper registers</strong> — get lost, get wet, never match the actual session</div></li>
+            <li><span class="bullet">✕</span><div><strong>No proof of presence</strong> — your word against a complaint; no timestamp, no record</div></li>
+            <li><span class="bullet">✕</span><div><strong>Leave approval purgatory</strong> — texting the owner, waiting days for a reply</div></li>
+            <li><span class="bullet">✕</span><div><strong>Vague skill feedback</strong> — no structure to tell students what to actually work on</div></li>
+            <li><span class="bullet">✕</span><div><strong>Salary surprises</strong> — never sure how late minutes or leaves will affect your take-home</div></li>
+          </ul>
+        </div>
+        <div class="vs-col solutions">
+          <div class="vs-col-head"><span class="dot"></span> With CoachEaze</div>
+          <ul class="vs-list">
+            <li><span class="bullet">✓</span><div><strong>Face recognition attendance</strong> — one group photo, entire batch marked — works on any phone</div></li>
+            <li><span class="bullet">✓</span><div><strong>Face + GPS check-in</strong> — your presence is verified automatically, no disputes possible</div></li>
+            <li><span class="bullet">✓</span><div><strong>In-app leave requests</strong> — submit with one tap; get approved or rejected with a notification</div></li>
+            <li><span class="bullet">✓</span><div><strong>Per-skill student ratings</strong> — rate footwork, smash, net play — students see exactly what to improve</div></li>
+            <li><span class="bullet">✓</span><div><strong>Transparent salary view</strong> — base, late deductions, leave deductions, final — no guesswork</div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Student -->
+    <div class="role-panel" id="role-student">
+      <p class="role-headline">Know exactly where you stand, every session</p>
+      <div class="vs-grid">
+        <div class="vs-col problems">
+          <div class="vs-col-head"><span class="dot"></span> Before CoachEaze</div>
+          <ul class="vs-list">
+            <li><span class="bullet">✕</span><div><strong>Attendance blind spot</strong> — no idea what your actual percentage looks like over the month</div></li>
+            <li><span class="bullet">✕</span><div><strong>Fee uncertainty</strong> — calling the coach or owner to confirm whether your payment went through</div></li>
+            <li><span class="bullet">✕</span><div><strong>Missed announcements</strong> — schedule changes buried in a WhatsApp group you stopped reading</div></li>
+            <li><span class="bullet">✕</span><div><strong>Vague feedback</strong> — "improve your smash" with no tracking, no comparison, no baseline</div></li>
+            <li><span class="bullet">✕</span><div><strong>Nothing to show for months of work</strong> — no milestones, no sense of progress</div></li>
+          </ul>
+        </div>
+        <div class="vs-col solutions">
+          <div class="vs-col-head"><span class="dot"></span> With CoachEaze</div>
+          <ul class="vs-list">
+            <li><span class="bullet">✓</span><div><strong>Full attendance history</strong> — session by session, any time, on your phone</div></li>
+            <li><span class="bullet">✓</span><div><strong>Payment dashboard</strong> — paid months, pending dues, transaction history — instantly visible</div></li>
+            <li><span class="bullet">✓</span><div><strong>In-app announcements</strong> — schedule changes and updates, no WhatsApp scrolling needed</div></li>
+            <li><span class="bullet">✓</span><div><strong>Skill ratings over time</strong> — see every skill rated by your coach, track what's improving</div></li>
+            <li><span class="bullet">✓</span><div><strong>Achievements and badges</strong> — bronze to platinum milestones that mark real progress</div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parent -->
+    <div class="role-panel" id="role-parent">
+      <p class="role-headline">Stay close to your child's progress — without the 10 PM calls</p>
+      <div class="vs-grid">
+        <div class="vs-col problems">
+          <div class="vs-col-head"><span class="dot"></span> Before CoachEaze</div>
+          <ul class="vs-list">
+            <li><span class="bullet">✕</span><div><strong>No real-time updates</strong> — calling the coach just to find out if your child showed up today</div></li>
+            <li><span class="bullet">✕</span><div><strong>Fee confusion</strong> — no idea what's paid, what's pending, or where receipts went</div></li>
+            <li><span class="bullet">✕</span><div><strong>Motivation drops</strong> — kids lose interest when there's nothing to show for months of training</div></li>
+            <li><span class="bullet">✕</span><div><strong>Missed announcements</strong> — not in the right WhatsApp group, always the last to know</div></li>
+            <li><span class="bullet">✕</span><div><strong>Vague progress reports</strong> — "doing fine" is the only update you ever get</div></li>
+          </ul>
+        </div>
+        <div class="vs-col solutions">
+          <div class="vs-col-head"><span class="dot"></span> With CoachEaze</div>
+          <ul class="vs-list">
+            <li><span class="bullet">✓</span><div><strong>Live attendance dashboard</strong> — see every session your child attended, updated in real time</div></li>
+            <li><span class="bullet">✓</span><div><strong>Fee & payment history</strong> — what's paid, what's due, all in one place — no more asking</div></li>
+            <li><span class="bullet">✓</span><div><strong>Gamified achievements</strong> — badges give kids visible goals that keep them motivated to turn up</div></li>
+            <li><span class="bullet">✓</span><div><strong>All announcements in-app</strong> — schedule changes, holidays, events — you'll never miss one</div></li>
+            <li><span class="bullet">✓</span><div><strong>Skill progress view</strong> — see what your coach rated your child on, session by session</div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function switchRole(role, btn) {
+  document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'))
+  document.querySelectorAll('.role-panel').forEach(p => p.classList.remove('active'))
+  btn.classList.add('active')
+  document.getElementById('role-' + role).classList.add('active')
+}
+</script>
+
+<!-- ═════════════ FEATURES ═════════════ -->
+<section id="features">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-tag">Features</span>
+      <h2>Everything your academy needs, nothing it doesn't</h2>
+      <p>Replace the WhatsApp groups, Excel sheets and printed attendance registers with one clean, fast, privacy-first app.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>AI Face Recognition Attendance</h3>
+        <p>Mark an entire batch in one group photo, or let auto-detect scan the doorway and mark students as they arrive. Works on any phone — no hardware needed.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📍</div>
+        <h3>GPS Coach Self-Check-in</h3>
+        <p>Coaches clock in with face + location verification within 50m of the centre. No more "I was there, I promise" — proof is automatic.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Multi-Batch Scheduling</h3>
+        <p>Assign students to multiple batches, set weekday/weekend timings, attach coaches, manage sessions — all from one screen.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💸</div>
+        <h3>Fees, Revenue & Packages</h3>
+        <p>Monthly, quarterly, annual packages with configurable discounts. Mark paid, auto-track dues, export invoices. Coaches don't see money; admins see everything.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⭐</div>
+        <h3>Performance Tracking</h3>
+        <p>Rate students on every skill your sport cares about — forehand, smash, footwork, drop shot. Students and parents see progress over time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <h3>Gamified Achievements</h3>
+        <p>Bronze, silver, gold and platinum badges keep kids showing up. Parents love the progress signals. Coaches love the motivation boost.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👨‍👩‍👧</div>
+        <h3>Parent & Kid Dashboards</h3>
+        <p>Separate, age-appropriate views. Parents track their child's attendance, fees and achievements without ever calling the coach.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Coach Salary Automation</h3>
+        <p>Base salary, late-minute deductions, leave handling, Excel exports — salaries are calculated automatically, admin just taps "Mark Paid".</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛍</div>
+        <h3>Academy Shop</h3>
+        <p>Students order racquets, shoes, stringing services directly in the app. Admin manages inventory and order status — simple as that.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>DPDP-Compliant by Design</h3>
+        <p>Biometric face data encrypted at rest. Right-to-erasure + data export built in. Consent logs, audit trail, everything the law expects.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📣</div>
+        <h3>Announcements</h3>
+        <p>Batch-specific or academy-wide. Students and parents get notified instantly. No more chasing down WhatsApp admins for the schedule change.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Statistics & Reports</h3>
+        <p>Attendance trends, fee collection, revenue per centre, student performance — every chart an admin could want, exportable, sharable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ HOW IT WORKS ═════════════ -->
+<section id="how">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-tag">How it works</span>
+      <h2>From sign-up to running your first batch in 10 minutes</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Request your setup token</h3>
+        <p>Drop us a line — we'll email you a setup token within 24 hours.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Register your academy</h3>
+        <p>Paste the token, fill in your details, pick your sport, verify OTP, set a password. Done.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Add coaches & centres</h3>
+        <p>Invite coaches by email. Set up centres with GPS coordinates for location-verified attendance.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Enrol students</h3>
+        <p>Email invites, batch assignments, automatic T&amp;C consent capture — all handled by the app.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ TESTIMONIALS ═════════════ -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-tag">Loved by academies</span>
+      <h2>What coaches and parents are saying</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"We switched from spreadsheets to CoachEaze in a week. Attendance is now effortless — the camera recognises kids the moment they walk in."</p>
+        <div class="person">
+          <div class="avatar">R</div>
+          <div>
+            <div class="name">Rajesh Menon</div>
+            <div class="role">Chief Coach · RSBA Badminton Academy, Bengaluru</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"My 9-year-old loves seeing his badges grow. He's on a 27-day streak because he doesn't want to lose his Legend badge. Best motivator ever."</p>
+        <div class="person">
+          <div class="avatar">P</div>
+          <div>
+            <div class="name">Priya Shah</div>
+            <div class="role">Parent · Mumbai</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"The GPS self-check for coaches is brilliant. Salary disputes are gone. Parents know exactly when I arrived. Transparency wins."</p>
+        <div class="person">
+          <div class="avatar">A</div>
+          <div>
+            <div class="name">Arjun Kapoor</div>
+            <div class="role">Head Coach · Elite Tennis Academy, Delhi</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ PRICING ═════════════ -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-tag">Pricing</span>
+      <h2>Simple, transparent, per-academy pricing</h2>
+      <p>Free 30-day trial. No card required. Cancel anytime.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>STARTER</h3>
+        <div class="price-amount"><span class="cur">₹</span><span class="num">999</span><span class="per">/mo</span></div>
+        <ul class="price-feat">
+          <li>Up to 50 students</li>
+          <li>1 centre, 5 batches</li>
+          <li>Face-recognition attendance</li>
+          <li>Fee tracking</li>
+          <li>Parent dashboard</li>
+          <li>Email support</li>
+        </ul>
+        <a href="#download" class="price-btn">Start free trial</a>
+      </div>
+      <div class="price-card featured">
+        <h3>GROWTH</h3>
+        <div class="price-amount"><span class="cur">₹</span><span class="num">2,499</span><span class="per">/mo</span></div>
+        <ul class="price-feat">
+          <li>Up to 250 students</li>
+          <li>3 centres, unlimited batches</li>
+          <li>Everything in Starter</li>
+          <li>Coach salary automation</li>
+          <li>Academy Shop</li>
+          <li>Achievement badges</li>
+          <li>WhatsApp + email support</li>
+        </ul>
+        <a href="#download" class="price-btn">Start free trial</a>
+      </div>
+      <div class="price-card">
+        <h3>ELITE</h3>
+        <div class="price-amount"><span class="cur">₹</span><span class="num">4,999</span><span class="per">/mo</span></div>
+        <ul class="price-feat">
+          <li>Unlimited students</li>
+          <li>Unlimited centres</li>
+          <li>Everything in Growth</li>
+          <li>Multi-sport support</li>
+          <li>Custom branding</li>
+          <li>Dedicated onboarding</li>
+          <li>Priority 24×7 support</li>
+        </ul>
+        <a href="#download" class="price-btn">Start free trial</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ DOWNLOAD CTA ═════════════ -->
+<section id="download">
+  <div class="container">
+    <div class="download-cta">
+      <h2>Ready to modernise your academy?</h2>
+      <p>Download the CoachEaze app today. Set up in minutes, see the difference by your next class.</p>
+      <div class="store-row" style="justify-content:center">
+        <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.coacheaze.app" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M3.609 1.814 13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893 2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198 2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626-2.498-2.49 2.499-2.492zm-3.199-3.19L5.864 2.18l10.937 6.333-2.302 2.302z"/></svg>
+          <div class="label"><div class="sm">GET IT ON</div><div class="lg">Google Play</div></div>
+        </a>
+        <a class="store-btn" href="https://apps.apple.com/app/coacheaze/id000000000" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <div class="label"><div class="sm">Download on the</div><div class="lg">App Store</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ FAQ ═════════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-tag">Frequently Asked</span>
+      <h2>Answers to the stuff academies actually ask</h2>
+    </div>
+    <div class="faq-list">
+      <details>
+        <summary>Does CoachEaze work for sports other than badminton?</summary>
+        <p>Yes — CoachEaze supports badminton, tennis, cricket, football, basketball, swimming, table tennis, martial arts, volleyball and more. Each sport ships with its own standardised skill list that your coaches rate students on.</p>
+      </details>
+      <details>
+        <summary>How does the AI face recognition attendance actually work?</summary>
+        <p>Your coaches register every student's face once (a short photo capture with liveness verification). After that, the app recognises students via group photo ("Smart Capture") or a continuously scanning camera ("Auto-Detect") pointed at the doorway. All matching runs on the phone — no photos are uploaded.</p>
+      </details>
+      <details>
+        <summary>Is student biometric data safe?</summary>
+        <p>Face descriptors are encrypted at rest with AES-128 + HMAC. We're DPDP Act 2023 compliant by design — right-to-erasure, data export, consent logs and audit trail are built in. Biometric data never leaves your academy's tenant.</p>
+      </details>
+      <details>
+        <summary>Can parents see their child's progress?</summary>
+        <p>Yes. Parents log in with their own email and see their kid's attendance heatmap, fees, performance ratings, achievements and upcoming sessions — without cluttering the coach's inbox.</p>
+      </details>
+      <details>
+        <summary>Do you integrate with UPI / payment gateways?</summary>
+        <p>Payment gateway support (Razorpay, Cashfree, Stripe India) is on the Growth and Elite plans. Manual "Mark Paid" works everywhere from day one.</p>
+      </details>
+      <details>
+        <summary>What happens if my internet goes down during class?</summary>
+        <p>The attendance flow caches locally and syncs when you're back online. Face recognition runs entirely on-device so it's internet-optional.</p>
+      </details>
+      <details>
+        <summary>Can I import my existing students?</summary>
+        <p>Yes — Elite plans include onboarding assistance. We import your roster, batch structure and historical attendance from Excel/CSV.</p>
+      </details>
+      <details>
+        <summary>How do I get a setup token?</summary>
+        <p>Tap "Register your Academy" in the app and use the "Request a Token" button — or email <a href="mailto:hello@coacheaze.com" style="color:var(--neon)">hello@coacheaze.com</a>. We respond within one business day.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ FOOTER ═════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="#" class="brand">
+          <svg class="brand-logo" viewBox="0 0 100 100" style="width:36px;height:36px">
+            <defs>
+              <radialGradient id="lgbg2" cx="38%" cy="32%" r="70%">
+                <stop offset="0%" stop-color="#1e3563"/>
+                <stop offset="100%" stop-color="#04091a"/>
+              </radialGradient>
+            </defs>
+            <circle cx="50" cy="50" r="49" fill="url(#lgbg2)"/>
+            <path d="M 20,10 C 96,10 96,90 20,90" fill="none" stroke="url(#lga)" stroke-width="7" stroke-linecap="round"/>
+            <path d="M 80,10 C 4,10 4,90 80,90" fill="none" stroke="url(#lgb)" stroke-width="7" stroke-linecap="round"/>
+          </svg>
+          <span class="brand-title"><span class="c1">Coach</span><span class="c2">Eaze</span></span>
+        </a>
+        <p>The all-in-one sports academy management app. Face-recognition attendance, fees, performance, parents — sorted.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#download">Download</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="mailto:hello@coacheaze.com">About</a>
+        <a href="mailto:hello@coacheaze.com">Contact</a>
+        <a href="#faq">FAQ</a>
+        <a href="mailto:support@coacheaze.com">Support</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">DPDP Compliance</a>
+        <a href="#">Grievance Officer</a>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2026 CoachEaze. All rights reserved. Made in India 🇮🇳 for the world.
+    </div>
+  </div>
+</footer>
+
+<!-- Hidden keyword rich block for SEO crawlers -->
+<div class="sr-only">
+  CoachEaze is a sports academy management platform for coaching institutes, sports schools and individual coaches. We serve badminton academies, tennis clubs, cricket coaching centres, football academies, basketball training institutes, swimming pools, martial arts dojos, karate schools, taekwondo academies, table tennis clubs, volleyball teams, athletics centres, gymnastics schools, chess academies, archery ranges, hockey academies and skating rinks. Our attendance tracking software uses artificial intelligence and facial recognition to automate roll calls. Features include GPS-verified coach check-in, multi-batch student enrolment, monthly quarterly annual fee packages with configurable discounts, performance skill rating, achievement badges with bronze silver gold and platinum tiers, parent and kid dashboards, academy shop for equipment and services, salary automation for coaches, leave management, announcements, achievement gamification and DPDP Act 2023 compliant biometric encryption. Search terms: sports academy software India, badminton academy app, tennis coaching management, cricket academy platform, football coaching app, swimming academy app, martial arts management, sports CRM India, coaching institute software, athletics academy platform, sports school management system, academy billing software, attendance tracker with face recognition, AI attendance app, parent coach communication, kids sports tracking, adult student sports app, academy subscription software, multi-sport management.
+</div>
+
+<script>
+  // Shrink nav on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Animated stat counters
+  const statNums = document.querySelectorAll('.stat .num');
+  const animate = (el, target) => {
+    const duration = 1600;
+    const startTime = performance.now();
+    const m = target.match(/([\d,\.]+)(.*)/);
+    if (!m) return;
+    const n = parseFloat(m[1].replace(/,/g, ''));
+    const suffix = m[2];
+    const step = (now) => {
+      const p = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = n * eased;
+      const formatted = n >= 1000
+        ? Math.round(val).toLocaleString('en-IN')
+        : val.toFixed(n % 1 ? 1 : 0);
+      el.textContent = formatted + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !e.target.dataset.animated) {
+        e.target.dataset.animated = '1';
+        animate(e.target, e.target.textContent);
+      }
+    });
+  }, { threshold: 0.5 });
+  statNums.forEach(n => observer.observe(n));
+</script>
+
+</body>
+</html>
