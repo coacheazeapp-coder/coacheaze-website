@@ -223,14 +223,23 @@
 
     <div class="demo on" id="demo-face">
       <div class="demo-box">
-        <div class="photo" id="photo"><div class="kids" id="kids"></div><div class="scan" id="scan"></div><div class="flash" id="flash"></div></div>
-        <div class="counter"><b id="faceCount">0</b><span>/ 12 marked present</span></div>
+        <div class="shot" id="shot">
+          <img src="assets/img/team.jpg" alt="A coach taking a group photo of his team" width="1080" height="1140" loading="lazy">
+          <div class="vf" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="faces" id="faces"></div>
+          <div class="tap" id="tap" aria-hidden="true"><span class="pill">Mark attendance</span><span class="finger">👆</span><span class="ripple"></span></div>
+          <div class="scan" id="scan"></div>
+          <div class="flash" id="flash"></div>
+          <div class="confetti" id="confetti"></div>
+          <div class="toast" id="toast">✓ 12 of 12 present · Saved · Parents notified</div>
+        </div>
       </div>
       <div class="demo-side">
         <h3>One photo. Whole batch marked.</h3>
-        <p>The coach takes a single group photo and CoachEaze recognises every registered student. No register, no roll call.</p>
-        <button class="btn btn-coral btn-big" id="snap">📸 Snap the group photo</button>
-        <div class="demo-status" id="faceStatus">Tap the button to try it.</div>
+        <p>The coach points the phone at the team and taps <b>Mark attendance</b>. CoachEaze recognises every registered student in seconds.</p>
+        <button class="btn btn-coral btn-big" id="snap">📸 Mark attendance</button>
+        <div class="roll" id="roll"></div>
+        <div class="demo-status" id="faceStatus">U-14 Football · Evening batch · 12 students</div>
       </div>
     </div>
 
@@ -247,16 +256,17 @@
           </svg>
           <div class="zone" id="zone"></div>
           <div class="centre" id="centre"><span>City Sports Centre</span><i>🏟️</i></div>
-          <div class="coach" id="coach" aria-label="Coach (drag me)"><svg viewBox="0 0 40 48"><path d="M20 47s15-15.5 15-27A15 15 0 0 0 5 20c0 11.5 15 27 15 27Z" fill="#ff7a59"/><circle cx="20" cy="19" r="10" fill="#fff"/><circle cx="20" cy="16" r="4" fill="#ff7a59"/><path d="M13 25c1.6-3.4 4.2-5 7-5s5.4 1.6 7 5" fill="#ff7a59"/></svg></div>
-          <div class="dist" id="dist">— m<small>from the centre</small></div>
-          <div class="hint">Drag the coach, or tap the map</div>
+          <div class="target" id="target"></div>
+          <div class="coach" id="coach"><span class="shadow"></span><img id="coachImg" src="assets/img/coach-run.png" alt="Coach" width="163" height="300"><span class="snapflash"></span></div>
+          <div class="dist" id="dist">— m<small>from City Sports Centre</small></div>
+          <div class="hint">Drag or tap anywhere. The coach runs there.</div>
         </div>
       </div>
       <div class="demo-side">
         <h3>Check in only at the centre</h3>
-        <p>Coaches check in with their face, and only when they're within 150 m of their centre. On-time and late arrivals go straight into salary.</p>
-        <button class="btn btn-coral btn-big" id="checkinBtn">✅ Check in now</button>
-        <div class="demo-status" id="checkStatus">Move the coach inside the green circle, then check in.</div>
+        <p>When the coach arrives, he takes a quick selfie. CoachEaze checks his face <b>and</b> that he's within 150 m of the centre, and records whether he's on time.</p>
+        <button class="btn btn-coral btn-big" id="checkinBtn">🏃 Run to the centre</button>
+        <div class="demo-status" id="checkStatus">Move the coach. He'll check in wherever he stops.</div>
       </div>
     </div>
 

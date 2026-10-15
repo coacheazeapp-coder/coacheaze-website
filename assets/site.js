@@ -85,56 +85,65 @@
     });
   });
 
-  // 1) Group photo: 12 players, scan, every face boxed and named
-  var kidsEl = document.getElementById('kids');
-  if (kidsEl) {
-    var names = ['Aarav', 'Diya', 'Kabir', 'Meera', 'Rohan', 'Anaya', 'Ishaan', 'Saanvi', 'Vihaan', 'Tara', 'Arjun', 'Zoya'];
-    var skins = ['#f1c7a3', '#d9a07a', '#c68b5e', '#a8704a', '#e8b896', '#8d5a3b'];
-    var hair = ['#1d1a1a', '#2b211c', '#3a2a20', '#121212'];
-    var jerseys = ['#ff7a59', '#3b5bdb', '#ffc542', '#14c6b4', '#a99bff', '#ffffff'];
-    names.forEach(function (n, i) {
-      var sk = skins[i % skins.length], hr = hair[i % hair.length], js = jerseys[(i * 5) % jerseys.length];
-      var longHair = i % 2 === 1;
-      var d = document.createElement('div'); d.className = 'kid';
-      d.innerHTML = '<svg viewBox="0 0 60 80" aria-hidden="true">' +
-        (longHair ? '<path d="M14 30c0-14 7-22 16-22s16 8 16 22v14H14z" fill="' + hr + '"/>' : '') +
-        '<path d="M8 80c0-16 9-26 22-26s22 10 22 26z" fill="' + js + '"/>' +
-        '<path d="M24 54h12v5a6 6 0 0 1-12 0z" fill="' + sk + '"/>' +
-        '<circle cx="30" cy="32" r="15" fill="' + sk + '"/>' +
-        '<path d="M15 30c0-10 6-16 15-16s15 6 15 16c-4-5-9-7-15-7s-11 2-15 7z" fill="' + hr + '"/>' +
-        '<circle cx="24.5" cy="34" r="1.8" fill="#222"/><circle cx="35.5" cy="34" r="1.8" fill="#222"/>' +
-        '<path d="M25 40c2.5 2.4 7.5 2.4 10 0" stroke="#7a3b2a" stroke-width="1.8" fill="none" stroke-linecap="round"/>' +
-        '<text x="30" y="72" text-anchor="middle" font-size="9" font-weight="800" fill="' + (js === '#ffffff' ? '#121735' : '#fff') + '" font-family="Barlow,sans-serif">' + (i + 7) + '</text></svg>' +
-        '<span class="box"></span><span class="tag">' + n + ' ✓</span>';
-      kidsEl.appendChild(d);
+  // 1) Group photo: coach aims, taps Mark attendance, every face ticked
+  var shot = document.getElementById('shot');
+  if (shot) {
+    // face centres in the 1080 x 1140 photo
+    var FACES = [
+      ['Kabir', 225, 360], ['Aarav', 357, 322], ['Rohan', 500, 310], ['Ishaan', 613, 310], ['Diya', 735, 330], ['Meera', 840, 342], ['Anaya', 925, 378],
+      ['Vihaan', 380, 560], ['Arjun', 535, 595], ['Reyansh', 680, 615], ['Saanvi', 800, 580], ['Tara', 925, 610]
+    ];
+    var facesEl = document.getElementById('faces'), roll = document.getElementById('roll');
+    FACES.forEach(function (f) {
+      var b = document.createElement('span'); b.className = 'fbox';
+      b.style.left = (f[1] / 1080 * 100) + '%'; b.style.top = (f[2] / 1140 * 100) + '%';
+      b.innerHTML = '<b>' + f[0] + '</b><em>✓</em>'; facesEl.appendChild(b);
+      var r = document.createElement('span'); r.innerHTML = '<i></i>' + f[0]; roll.appendChild(r);
     });
-    var snap = document.getElementById('snap'), busy = false;
-    snap.addEventListener('click', function () {
-      if (busy) return; busy = true;
-      var kids = kidsEl.querySelectorAll('.kid'), cnt = document.getElementById('faceCount'), st = document.getElementById('faceStatus');
-      kids.forEach(function (k) { k.classList.remove('found'); });
-      cnt.textContent = '0'; st.className = 'demo-status'; st.textContent = 'Recognising faces…';
+    var snapBtn = document.getElementById('snap'), shooting = false;
+    var sleep = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+    var confetti = function () {
+      var c = document.getElementById('confetti'); c.innerHTML = '';
+      var cols = ['#14c6b4', '#ff7a59', '#ffc542', '#7cc6fe', '#a99bff', '#ffffff'];
+      for (var i = 0; i < 36; i++) {
+        var d = document.createElement('i');
+        d.style.left = (Math.random() * 100) + '%'; d.style.background = cols[i % cols.length];
+        d.style.animationDelay = (Math.random() * .35) + 's';
+        d.style.setProperty('--fy', (shot.offsetHeight * (.6 + Math.random() * .5)) + 'px');
+        d.style.setProperty('--fr', (Math.random() * 900 - 450) + 'deg');
+        c.appendChild(d);
+      }
+    };
+    snapBtn.addEventListener('click', async function () {
+      if (shooting) return; shooting = true;
+      var boxes = facesEl.querySelectorAll('.fbox'), names = roll.querySelectorAll('span'), st = document.getElementById('faceStatus');
+      shot.classList.remove('done', 'press'); document.getElementById('confetti').innerHTML = '';
+      boxes.forEach(function (b) { b.classList.remove('seen', 'ok'); }); names.forEach(function (n) { n.classList.remove('on'); });
+      st.className = 'demo-status'; st.textContent = 'Coach points the camera at the team…';
+      shot.classList.add('aim'); await sleep(900);
+      shot.classList.add('press'); st.textContent = 'Mark attendance ✓';
+      await sleep(250);
       var fl = document.getElementById('flash'), sc = document.getElementById('scan');
       fl.classList.remove('go'); sc.classList.remove('go'); void fl.offsetWidth; fl.classList.add('go'); sc.classList.add('go');
-      var t0 = performance.now(), order = Array.prototype.slice.call(kids);
-      order.forEach(function (k, i) {
-        var row = window.innerWidth <= 620 ? Math.floor(i / 4) : Math.floor(i / 6);
-        setTimeout(function () {
-          k.classList.add('found'); cnt.textContent = String(+cnt.textContent + 1);
-          cnt.parentNode.classList.remove('pop'); void cnt.offsetWidth; cnt.parentNode.classList.add('pop');
-          if (+cnt.textContent === kids.length) {
-            st.className = 'demo-status good';
-            st.textContent = '✓ All 12 marked present in ' + ((performance.now() - t0) / 1000).toFixed(1) + ' seconds';
-            snap.textContent = '↻ Try again'; busy = false;
-          }
-        }, 450 + row * 650 + (i % 6) * 90);
-      });
+      shot.classList.remove('aim');
+      st.textContent = 'Recognising faces…';
+      var t0 = performance.now();
+      boxes.forEach(function (b, i) { setTimeout(function () { b.classList.add('seen'); }, 150 + i * 70); });
+      await sleep(700);
+      for (var i = 0; i < boxes.length; i++) {
+        boxes[i].classList.add('ok'); names[i].classList.add('on');
+        await sleep(120);
+      }
+      shot.classList.add('done'); confetti();
+      st.className = 'demo-status good';
+      st.textContent = '✓ All 12 present in ' + ((performance.now() - t0) / 1000).toFixed(1) + ' s. Parents get a notification.';
+      snapBtn.textContent = '↻ Do it again'; shooting = false;
     });
   }
 
-  // 2) Coach check-in: drag the pin; inside 150 m = checked in
-  var map = document.getElementById('map'), coach = document.getElementById('coach');
-  var R = 0, cx = 0, cy = 0, px = 0, py = 0, placed = false;
+  // 2) Coach check-in: he runs to where you point, then takes a selfie
+  var map = document.getElementById('map'), coach = document.getElementById('coach'), cimg = document.getElementById('coachImg');
+  var R = 0, cx = 0, cy = 0, px = 0, py = 0, placed = false, runT = null, tick = null;
   function placeMap() {
     if (!map || !map.offsetWidth) return;
     var w = map.offsetWidth, h = map.offsetHeight;
@@ -142,39 +151,60 @@
     var z = document.getElementById('zone');
     z.style.left = cx + 'px'; z.style.top = cy + 'px'; z.style.width = z.style.height = (R * 2) + 'px';
     var c = document.getElementById('centre'); c.style.left = cx + 'px'; c.style.top = cy + 'px';
-    if (!placed) { px = w * .14; py = h * .3; placed = true; }
-    px = Math.min(Math.max(px, 10), w - 10); py = Math.min(Math.max(py, 30), h - 4);
-    moveCoach(px, py);
+    if (!placed) { px = w * .14; py = h * .42; placed = true; coach.classList.add('idle'); }
+    coach.style.transitionDuration = '0ms'; coach.style.left = px + 'px'; coach.style.top = py + 'px';
+    showDist(px, py);
   }
-  function metres() { return Math.round(Math.hypot(px - cx, py - cy) / R * 150); }
-  function moveCoach(x, y) {
-    px = x; py = y; coach.style.left = x + 'px'; coach.style.top = y + 'px';
-    var m = metres(), d = document.getElementById('dist');
+  function metresAt(x, y) { return Math.round(Math.hypot(x - cx, y - cy) / R * 150); }
+  function showDist(x, y) {
+    var m = metresAt(x, y), d = document.getElementById('dist');
     d.innerHTML = m + ' m<small>from City Sports Centre</small>';
     d.style.color = m <= 150 ? '#0b6f66' : '#121735';
+  }
+  function runTo(x, y) {
+    if (!map) return;
+    var w = map.offsetWidth, h = map.offsetHeight;
+    x = Math.min(Math.max(x, 24), w - 24); y = Math.min(Math.max(y, h * .3), h - 6);
+    var cs = getComputedStyle(coach), sx = parseFloat(cs.left), sy = parseFloat(cs.top);
+    coach.style.transitionDuration = '0ms'; coach.style.left = sx + 'px'; coach.style.top = sy + 'px';
+    var dist = Math.hypot(x - sx, y - sy), ms = Math.min(2400, Math.max(450, dist * 5.5));
+    clearTimeout(runT); cancelAnimationFrame(tick);
+    cimg.src = 'assets/img/coach-run.png'; coach.classList.remove('selfie', 'idle', 'snapping');
+    coach.classList.toggle('left', x < sx); coach.classList.add('running');
+    var st = document.getElementById('checkStatus'); st.className = 'demo-status'; st.textContent = '🏃 On his way…';
+    var tg = document.getElementById('target'); tg.style.left = x + 'px'; tg.style.top = y + 'px'; tg.classList.add('on');
+    void coach.offsetWidth;
+    coach.style.transitionDuration = ms + 'ms'; coach.style.left = x + 'px'; coach.style.top = y + 'px';
+    var loop = function () { var c2 = getComputedStyle(coach); showDist(parseFloat(c2.left), parseFloat(c2.top)); tick = requestAnimationFrame(loop); };
+    loop();
+    runT = setTimeout(function () {
+      cancelAnimationFrame(tick); px = x; py = y; showDist(x, y); tg.classList.remove('on');
+      coach.classList.remove('running', 'left'); cimg.src = 'assets/img/coach-selfie.png'; coach.classList.add('selfie');
+      st.textContent = '🤳 Taking a check-in selfie…';
+      runT = setTimeout(function () {
+        coach.classList.add('snapping');
+        var m = metresAt(x, y), t = new Date().toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' });
+        st.classList.remove('pop'); void st.offsetWidth;
+        if (m <= 150) { st.className = 'demo-status good pop'; st.textContent = '✓ Face verified · ' + m + ' m from the centre · Checked in at ' + t + ' · On time'; }
+        else { st.className = 'demo-status bad pop'; st.textContent = '✕ Face verified, but he is ' + m + ' m away. Check-in works only within 150 m.'; }
+      }, 700);
+    }, ms);
   }
   if (map) {
     var dragging = false;
     var at = function (e) { var r = map.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+    var tgt = document.getElementById('target');
     map.addEventListener('pointerdown', function (e) {
-      var p = at(e); dragging = true; map.setPointerCapture(e.pointerId);
-      var w = map.offsetWidth, h = map.offsetHeight;
-      moveCoach(Math.min(Math.max(p[0], 10), w - 10), Math.min(Math.max(p[1], 30), h - 4));
+      dragging = true; map.setPointerCapture(e.pointerId);
+      var p = at(e); tgt.style.left = p[0] + 'px'; tgt.style.top = p[1] + 'px'; tgt.classList.add('on'); showDist(p[0], p[1]);
     });
     map.addEventListener('pointermove', function (e) {
-      if (!dragging) return; var p = at(e), w = map.offsetWidth, h = map.offsetHeight;
-      moveCoach(Math.min(Math.max(p[0], 10), w - 10), Math.min(Math.max(p[1], 30), h - 4));
+      if (!dragging) return; var p = at(e); tgt.style.left = p[0] + 'px'; tgt.style.top = p[1] + 'px'; showDist(p[0], p[1]);
     });
-    map.addEventListener('pointerup', function () { dragging = false; });
+    map.addEventListener('pointerup', function (e) { if (!dragging) return; dragging = false; var p = at(e); runTo(p[0], p[1]); });
     window.addEventListener('resize', placeMap);
     placeMap();
-    document.getElementById('checkinBtn').addEventListener('click', function () {
-      var m = metres(), st = document.getElementById('checkStatus');
-      var now = new Date(), t = now.toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' });
-      st.classList.remove('pop'); void st.offsetWidth; st.classList.add('pop');
-      if (m <= 150) { st.className = 'demo-status good pop'; st.textContent = '✓ Face verified · Checked in at ' + t + ' · On time'; }
-      else { st.className = 'demo-status bad pop'; st.textContent = '✕ ' + m + ' m away. Move within 150 m of the centre to check in.'; }
-    });
+    document.getElementById('checkinBtn').addEventListener('click', function () { runTo(cx + R * .6, cy + R * .55); });
   }
 
   // 3) Time-saved calculator + the plan that fits
