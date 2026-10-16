@@ -111,7 +111,9 @@ a { color: var(--royal); }
 .marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
 .marquee-track { display: flex; gap: 14px; width: max-content; animation: marquee 38s linear infinite; }
 .marquee:hover .marquee-track { animation-play-state: paused; }
-.ribbon-cta { text-align: center; margin-top: 22px; }
+.ribbon-cta { text-align: center; margin-top: 26px; }
+.ribbon-cta .btn { font-size: 1.22rem; padding: 20px 34px; border-radius: 16px; }
+@media (max-width: 620px) { .ribbon-cta .btn { font-size: 1.05rem; padding: 17px 22px; } }
 .ribbon-cta .btn span { display: inline-block; transition: transform .25s; }
 .ribbon-cta .btn:hover span { transform: translateX(5px); }
 a.sport { text-decoration: none; transition: transform .2s, box-shadow .2s; }
