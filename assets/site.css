@@ -269,6 +269,9 @@ section { padding: 96px 0; }
 .centre { position: absolute; transform: translate(-50%, -100%); display: grid; place-items: center; }
 .centre span { background: var(--night); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 8px; border-radius: 6px; margin-bottom: 4px; white-space: nowrap; }
 .centre i { width: 30px; height: 30px; border-radius: 50%; background: var(--royal); display: grid; place-items: center; color: #fff; box-shadow: 0 6px 14px -4px rgba(59,91,219,.7); }
+.place { position: absolute; transform: translate(-50%, -50%); display: grid; justify-items: center; gap: 3px; z-index: 1; pointer-events: none; }
+.place i { font-style: normal; width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; font-size: 1.45rem; background: #fff; box-shadow: 0 8px 18px -8px rgba(10,15,44,.45), inset 0 0 0 1px rgba(10,15,44,.06); }
+.place span { font-size: .7rem; font-weight: 700; color: var(--night); background: rgba(255,255,255,.9); padding: 2px 7px; border-radius: 6px; white-space: nowrap; }
 .coach { position: absolute; width: auto; height: 27%; aspect-ratio: 163 / 300; transform: translate(-50%, -100%); z-index: 3; pointer-events: none; transition-property: left, top; transition-timing-function: linear; }
 .coach img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 6px 6px rgba(0,0,0,.25)); }
 .coach.left img { transform: scaleX(-1); }
@@ -296,6 +299,13 @@ input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 
 .result .big { font: 800 4.4rem/1 var(--display); color: var(--teal); }
 .result .unit { font-weight: 700; color: rgba(255,255,255,.8); }
 .result .sub { color: rgba(255,255,255,.7); margin: 8px 0 18px; }
+.perks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 14px; position: relative; z-index: 1; }
+.perks div { background: rgba(255,255,255,.07); border-radius: 14px; padding: 12px 12px 10px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.1); }
+.perks span { font-size: 1.3rem; display: block; line-height: 1; margin-bottom: 6px; }
+.perks b { font: 800 1.9rem/1 var(--display); color: #fff; display: block; }
+.perks small { color: rgba(255,255,255,.72) !important; font-size: .8rem !important; margin: 4px 0 0 !important; display: block; line-height: 1.3; }
+.payback { background: linear-gradient(90deg, rgba(20,198,180,.22), rgba(103,65,217,.22)); border-radius: 14px; padding: 12px 14px; margin-bottom: 16px; color: rgba(255,255,255,.88); font-weight: 600; line-height: 1.4; }
+.payback b { color: var(--sun); font-weight: 800; }
 .result .plan-fit { border-top: 1px solid rgba(255,255,255,.14); padding-top: 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 .result .plan-fit b { font: 800 1.6rem var(--display); text-transform: uppercase; color: var(--sun); }
 .result small { display: block; color: rgba(255,255,255,.5); margin-top: 14px; font-size: .78rem; }
@@ -449,6 +459,8 @@ footer.site .addr { font-size: .94rem; line-height: 1.6; }
   .fbox em { width: 15px; height: 15px; font-size: .55rem; line-height: 15px; right: -6px; bottom: -6px; }
   .toast { font-size: .78rem; }
   .coach { height: 30%; }
+  .place i { width: 30px; height: 30px; font-size: 1.05rem; border-radius: 9px; }
+  .place span { font-size: .6rem; padding: 1px 5px; }
   .map { aspect-ratio: 4 / 3.4; }
   .result .big { font-size: 3.6rem; }
   .demo-side h3 { font-size: 1.7rem; }

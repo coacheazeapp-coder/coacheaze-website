@@ -162,10 +162,36 @@
     d.innerHTML = m + ' m<small>from City Sports Centre</small>';
     d.style.color = m <= 150 ? '#0b6f66' : '#121735';
   }
+  // Stop beside a café, home, park or the centre pin instead of on top of it: nearest clear spot wins
+  function clearOfPlaces(x, y) {
+    var mr = map.getBoundingClientRect(), cw = coach.offsetWidth + 4, ch = coach.offsetHeight, w = map.offsetWidth, h = map.offsetHeight;
+    var boxes = [].map.call(map.querySelectorAll('.place, .centre, .dist, .hint'), function (el) {
+      var r = el.getBoundingClientRect();
+      return { l: r.left - mr.left - 6, r: r.right - mr.left + 6, t: r.top - mr.top - 6, b: r.bottom - mr.top + 6 };
+    });
+    var clear = function (px, py) {
+      if (px < cw / 2 || px > w - cw / 2 || py < h * .3 || py > h - 4) return false;
+      return boxes.every(function (q) { return !(px + cw / 2 > q.l && px - cw / 2 < q.r && py > q.t && py - ch < q.b); });
+    };
+    if (clear(x, y)) return [x, y];
+    var cands = [];
+    boxes.forEach(function (q) {
+      cands.push([q.r + cw / 2, y], [q.l - cw / 2, y], [x, q.t - 1], [x, q.b + ch + 1]);
+    });
+    cands.slice().forEach(function (c) { boxes.forEach(function (q) { cands.push([q.r + cw / 2, c[1]], [q.l - cw / 2, c[1]]); }); });
+    // dropped inside the 150 m ring: stay inside it if at all possible
+    var inside = metresAt(x, y) <= 150, best = null, bd = Infinity;
+    cands.forEach(function (c) {
+      var d = Math.hypot(c[0] - x, c[1] - y) + (inside && metresAt(c[0], c[1]) > 150 ? 1e5 : 0);
+      if (d < bd && clear(c[0], c[1])) { bd = d; best = c; }
+    });
+    return best || [x, y];
+  }
   function runTo(x, y) {
     if (!map) return;
     var w = map.offsetWidth, h = map.offsetHeight;
     x = Math.min(Math.max(x, 24), w - 24); y = Math.min(Math.max(y, h * .3), h - 6);
+    var fit = clearOfPlaces(x, y); x = fit[0]; y = fit[1];
     var cs = getComputedStyle(coach), sx = parseFloat(cs.left), sy = parseFloat(cs.top);
     coach.style.transitionDuration = '0ms'; coach.style.left = sx + 'px'; coach.style.top = sy + 'px';
     var dist = Math.hypot(x - sx, y - sy), ms = Math.min(2400, Math.max(450, dist * 5.5));
@@ -216,6 +242,12 @@
     { name: 'Legend', s: 250, c: Infinity, ce: 10, price: 4249 },
     { name: 'Royals', s: Infinity, c: Infinity, ce: Infinity, price: 6049 }
   ];
+  function countTo(id, to, pre) {
+    var el = document.getElementById(id); if (!el) return;
+    var from = +el.dataset.v || 0, k = 0; el.dataset.v = to;
+    clearInterval(el._t);
+    el._t = setInterval(function () { k++; el.textContent = pre + Math.round(from + (to - from) * k / 14).toLocaleString('en-IN'); if (k >= 14) clearInterval(el._t); }, 25);
+  }
   function calc() {
     var v = ids.map(function (id) { var el = document.getElementById(id); return el ? +el.value : 0; });
     if (!document.getElementById('cStudents')) return;
@@ -225,14 +257,19 @@
       document.getElementById('v' + id.slice(1)).textContent = v[i];
     });
     var st = v[0], ba = v[1], co = v[2], ce = v[3];
-    // register 5 min → 30 s per session; fees 4 min + parent updates 2 min per student a month; salary sheet 45 min per coach a month
-    var h = ba * 4.33 * 4.5 / 60 + st * 6 / 60 + co * 45 / 60;
-    var hr = Math.round(h);
-    var el = document.getElementById('hours'), from = +el.textContent || 0, k = 0;
-    clearInterval(calc.t);
-    calc.t = setInterval(function () { k++; el.textContent = Math.round(from + (hr - from) * k / 12); if (k >= 12) clearInterval(calc.t); }, 25);
-    document.getElementById('hoursSub').textContent = 'That’s about ' + Math.max(1, Math.round(hr / 4.33)) + ' hours every week, back on court.';
+    // register + chasing absentees 10 min per session; fee reminders, receipts and parent calls 12 min per student a month;
+    // attendance, late marks and salary sheet 90 min per coach a month; reports 60 min per centre a month
+    var hr = Math.round(ba * 4.33 * 10 / 60 + st * 12 / 60 + co * 1.5 + ce);
     var p = PLANS.filter(function (x) { return st <= x.s && co <= x.c && ce <= x.ce; })[0];
+    var val = hr * 500;
+    countTo('hours', hr, '');
+    countTo('pSessions', Math.round(hr / 1.5), '');
+    countTo('pEvenings', Math.max(1, Math.round(hr / 3)), '');
+    countTo('pMsgs', st * 4 + co * 8, '');
+    countTo('pPages', Math.round(ba * 4.33), '');
+    countTo('pValue', val, '₹');
+    document.getElementById('pTimes').textContent = Math.max(1, Math.round(val / p.price)) + '×';
+    document.getElementById('hoursSub').textContent = 'That’s about ' + Math.max(1, Math.round(hr / 4.33)) + ' hours every week, back on court.';
     document.getElementById('planName').textContent = p.name;
     document.getElementById('planPrice').textContent = '₹' + p.price.toLocaleString('en-IN') + '/month';
   }
