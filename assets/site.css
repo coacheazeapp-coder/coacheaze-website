@@ -185,6 +185,35 @@ section { padding: 96px 0; }
 .demo-status.good { background: #dcf8f4; color: #0b6f66; }
 .demo-status.bad { background: #ffe9e2; color: #b4401f; }
 
+/* Try-it buttons: moving gradient, shine, glow ring and a tapping hand */
+.btn-play { position: relative; color: #fff; font-weight: 800; letter-spacing: .02em; text-shadow: 0 1px 2px rgba(120, 30, 10, .35);
+  background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,.55) 50%, transparent 65%) -150% 0 / 250% 100% no-repeat,
+              linear-gradient(120deg, #ff5f6d, #ff7a59 30%, #ffc542 60%, #ff7a59 85%, #ff5f6d) 0 0 / 300% 100%;
+  animation: playGrad 6s linear infinite, playShine 2.8s ease-in-out infinite, playRing 2s ease-out infinite; }
+.btn-play:hover { transform: translateY(-3px) scale(1.03); }
+.btn-play:active { transform: scale(.96); }
+.btn-play::after { content: "👆"; position: absolute; right: -14px; bottom: -26px; font-size: 2rem; line-height: 1; pointer-events: none;
+  filter: drop-shadow(0 4px 6px rgba(10,15,44,.35)); animation: handTap 1.4s ease-in-out infinite; transform-origin: 50% 100%; }
+.btn-play.used::after { display: none; }
+.btn-play.used { animation: playGrad 6s linear infinite; box-shadow: 0 14px 30px -12px rgba(255, 95, 109, .8); }
+@keyframes playGrad { to { background-position: -150% 0, 300% 0; } }
+@keyframes playShine { 0%, 40% { background-position: -150% 0, 0 0; } 100% { background-position: 150% 0, 150% 0; } }
+@keyframes playRing { 0% { box-shadow: 0 14px 30px -12px rgba(255,95,109,.85), 0 0 0 0 rgba(255,122,89,.55); }
+  100% { box-shadow: 0 14px 30px -12px rgba(255,95,109,.85), 0 0 0 16px rgba(255,122,89,0); } }
+@keyframes handTap { 0%, 100% { transform: translate(0, 0) rotate(-12deg); } 45% { transform: translate(-8px, -12px) rotate(-18deg) scale(.92); } 55% { transform: translate(-8px, -12px) rotate(-18deg) scale(.86); } }
+
+/* Try-it tabs: gradient for the chosen one, gentle nudge on the others until someone taps */
+.try-tabs .tabs { background: linear-gradient(#fff, #fff) padding-box, linear-gradient(120deg, var(--teal), var(--royal), var(--coral)) border-box; border: 2px solid transparent; box-shadow: 0 14px 34px -18px rgba(59,91,219,.55); }
+.try-tabs .tab { position: relative; color: var(--night); }
+.try-tabs .tab:hover { background: #eef2fc; }
+.try-tabs .tab[aria-selected="true"] { background: linear-gradient(120deg, var(--royal), var(--teal)); color: #fff; box-shadow: 0 8px 20px -8px rgba(20,198,180,.9); }
+.try-tabs:not(.touched) .tab[aria-selected="false"] { animation: tabNudge 2.6s ease-in-out infinite; }
+.try-tabs:not(.touched) .tab[aria-selected="false"]:nth-child(3) { animation-delay: 1.3s; }
+.try-tabs:not(.touched) .tab[aria-selected="false"]::after { content: ""; position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 0 rgba(255,122,89,.7); animation: dotPing 1.6s ease-out infinite; }
+@keyframes tabNudge { 0%, 70%, 100% { transform: none; } 78% { transform: translateY(-3px) rotate(-2deg); } 86% { transform: translateY(-1px) rotate(2deg); } }
+@keyframes dotPing { to { box-shadow: 0 0 0 9px rgba(255,122,89,0); } }
+.hint::before { content: "👆 "; display: inline-block; animation: handTap 1.4s ease-in-out infinite; }
+
 /* Face demo — real group photo */
 .shot { position: relative; aspect-ratio: 1080 / 1140; border-radius: 16px; overflow: hidden; background: #0a0f2c; max-height: 620px; margin-inline: auto; }
 .shot img { width: 100%; height: 100%; object-fit: cover; transition: filter .6s; }

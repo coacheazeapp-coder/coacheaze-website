@@ -79,6 +79,7 @@
   var demoTabs = document.querySelectorAll('[data-demo]');
   demoTabs.forEach(function (t) {
     t.addEventListener('click', function () {
+      t.closest('.try-tabs').classList.add('touched');
       demoTabs.forEach(function (x) { x.setAttribute('aria-selected', x === t ? 'true' : 'false'); });
       document.querySelectorAll('.demo').forEach(function (d) { d.classList.toggle('on', d.id === 'demo-' + t.dataset.demo); });
       if (t.dataset.demo === 'checkin') placeMap();
@@ -115,7 +116,7 @@
       }
     };
     snapBtn.addEventListener('click', async function () {
-      if (shooting) return; shooting = true;
+      if (shooting) return; shooting = true; snapBtn.classList.add('used');
       var boxes = facesEl.querySelectorAll('.fbox'), names = roll.querySelectorAll('span'), st = document.getElementById('faceStatus');
       shot.classList.remove('done', 'press'); document.getElementById('confetti').innerHTML = '';
       boxes.forEach(function (b) { b.classList.remove('seen', 'ok'); }); names.forEach(function (n) { n.classList.remove('on'); });
@@ -204,7 +205,7 @@
     map.addEventListener('pointerup', function (e) { if (!dragging) return; dragging = false; var p = at(e); runTo(p[0], p[1]); });
     window.addEventListener('resize', placeMap);
     placeMap();
-    document.getElementById('checkinBtn').addEventListener('click', function () { runTo(cx + R * .6, cy + R * .55); });
+    document.getElementById('checkinBtn').addEventListener('click', function () { this.classList.add('used'); runTo(cx + R * .6, cy + R * .55); });
   }
 
   // 3) Time-saved calculator + the plan that fits
