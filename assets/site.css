@@ -299,7 +299,7 @@ input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 
 .result .big { font: 800 4.4rem/1 var(--display); color: var(--teal); }
 .result .unit { font-weight: 700; color: rgba(255,255,255,.8); }
 .result .sub { color: rgba(255,255,255,.7); margin: 8px 0 18px; }
-.perks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 14px; position: relative; z-index: 1; }
+.perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0 0 14px; position: relative; z-index: 1; }
 .perks div { background: rgba(255,255,255,.07); border-radius: 14px; padding: 12px 12px 10px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.1); }
 .perks span { font-size: 1.3rem; display: block; line-height: 1; margin-bottom: 6px; }
 .perks b { font: 800 1.9rem/1 var(--display); color: #fff; display: block; }

@@ -264,7 +264,6 @@
     var val = hr * 500;
     countTo('hours', hr, '');
     countTo('pSessions', Math.round(hr / 1.5), '');
-    countTo('pEvenings', Math.max(1, Math.round(hr / 3)), '');
     countTo('pMsgs', st * 4 + co * 8, '');
     countTo('pPages', Math.round(ba * 4.33), '');
     countTo('pValue', val, '₹');
