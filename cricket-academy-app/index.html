@@ -20,6 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Acme&family=Barlow:wght@400;500;600;700&family=Exo+2:ital,wght@1,600&family=Barlow+Condensed:ital,wght@0,700;0,800;1,800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="stylesheet" href="/assets/sport.css">
+<script>try{if(localStorage.getItem("ce-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "CoachEaze for Cricket academies", "applicationCategory": "BusinessApplication", "operatingSystem": "Web, Android", "url": "https://coacheaze.com/cricket-academy-app/", "description": "CoachEaze is the cricket academy management app: one-photo attendance, coach check-in, batting, bowling, fielding skill ratings, fees, salaries and a parent app. Free for 22 days.", "offers": {"@type": "AggregateOffer", "priceCurrency": "INR", "lowPrice": "999", "highPrice": "6049"}, "publisher": {"@type": "Organization", "name": "CoachEaze", "legalName": "DGIPlay Pvt. Ltd.", "url": "https://coacheaze.com/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "CoachEaze", "item": "https://coacheaze.com/"}, {"@type": "ListItem", "position": 2, "name": "Every sport", "item": "https://coacheaze.com/sports.html"}, {"@type": "ListItem", "position": 3, "name": "Cricket academy app", "item": "https://coacheaze.com/cricket-academy-app/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I manage cricket nets, squads and summer camps?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Create batches for each net session, squad and camp with their own coaches, timings and fees."}}, {"@type": "Question", "name": "Can coaches track batting and bowling separately?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Coaches rate batting, bowling, fielding, fitness or any skill you add, with notes for each player."}}, {"@type": "Question", "name": "Can we announce match squads to parents?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Send announcements to one batch or the whole academy. Parents and players see them in the app."}}, {"@type": "Question", "name": "Is there a free trial?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every feature is free for 22 days, with no payment needed. Then pick the plan that fits your academy size."}}, {"@type": "Question", "name": "Do I need to install anything?", "acceptedAnswer": {"@type": "Answer", "text": "No. CoachEaze works in any browser at app.coacheaze.com, on phone, tablet or laptop. An Android app is coming soon."}}]}]}
 </script>
@@ -54,12 +55,9 @@
         <a class="btn btn-ghost btn-big" href="#roll">Try it right here ↓</a>
       </div>
     </div>
-    <div class="court" id="court" role="img" aria-label="A cricket session in progress">
-      <svg viewBox="0 0 400 240" preserveAspectRatio="none" aria-hidden="true"><rect width="400" height="240" fill="#2f8f46"/><ellipse cx="200" cy="120" rx="185" ry="108" stroke="#fff" stroke-width="2.5" fill="none"/><ellipse cx="200" cy="120" rx="95" ry="58" stroke="#fff" stroke-width="1.5" stroke-dasharray="5 5" fill="none"/><rect x="80" y="106" width="240" height="28" rx="3" fill="#c9a66b"/><path d="M96 106V134M304 106V134" stroke="#fff" stroke-width="2" fill="none"/></svg>
-      <span class="pl a">A</span><span class="pl b">Y</span>
-      <span class="ball"><i>🔴</i></span>
-      <span class="score">Balls bowled: <b>0</b></span>
-      <span class="tip">Tap the court to speed it up</span>
+    <div class="court" id="court">
+      <canvas id="game" tabindex="0" role="img" aria-label="Play a quick cricket game: bat an over"></canvas>
+    </div>
     </div>
   </div>
 </section>
@@ -78,11 +76,12 @@
     <div class="s-copy reveal">
       <span class="kicker">Try it · Attendance</span>
       <h2>Take today's roll in <em>one photo</em></h2>
-      <p>The coach points the phone at the batch and taps once. CoachEaze recognises every registered player and tells parents they've arrived. Then tap any player to mark them absent and see what their parent gets.</p>
+      <p>Practice is already on. Coach Rahul raises the phone and taps once, while players train and warm up. CoachEaze finds every registered face, marks them present and tells parents they've arrived. Then tap any player to mark them absent and see what their parent gets.</p>
       <div class="roll-bar"><button class="btn btn-play btn-big" id="rollBtn" type="button">📸 Snap the batch</button></div>
     </div>
     <div class="panel reveal d1">
       <div class="batch-head"><b>U-14 Nets · 6:30 am · Nets 1–3</b><span>Cover Drive Cricket Academy</span></div>
+      <div class="scene"><canvas id="rollScene" role="img" aria-label="Coach Rahul photographs the batch while they train"></canvas></div>
       <div class="chips" id="chips"></div>
       <div class="s-status" id="rollStatus">12 players · waiting for the coach's photo</div>
     </div>
@@ -168,7 +167,7 @@
       <span class="url">or <a href="/#pricing" style="color:inherit">see pricing</a></span>
     </div>
     <div class="sec-head" style="margin:60px auto 20px"><span class="kicker">CoachEaze for every sport</span></div>
-    <nav class="others" aria-label="Sports"><a href="/badminton-academy-app/">🏸 Badminton</a><a href="/tennis-academy-app/">🎾 Tennis</a><a href="/cricket-academy-app/" aria-current="page">🏏 Cricket</a><a href="/football-academy-app/">⚽ Football</a><a href="/hockey-academy-app/">🏑 Hockey</a><a href="/swimming-academy-app/">🏊 Swimming</a><a href="/kabaddi-academy-app/">🤼 Kabaddi</a><a href="/volleyball-academy-app/">🏐 Volleyball</a><a href="/martial-arts-academy-app/">🥋 Martial Arts</a><a href="/sports.html">+ more sports</a></nav>
+    <nav class="others" aria-label="Sports"><a href="/badminton-academy-app/">🏸 Badminton</a><a href="/tennis-academy-app/">🎾 Tennis</a><a href="/cricket-academy-app/" aria-current="page">🏏 Cricket</a><a href="/football-academy-app/">⚽ Football</a><a href="/hockey-academy-app/">🏑 Hockey</a><a href="/swimming-academy-app/">🏊 Swimming</a><a href="/kabaddi-academy-app/">🤼 Kabaddi</a><a href="/volleyball-academy-app/">🏐 Volleyball</a><a href="/sports.html">+ more sports</a></nav>
   </div>
 </section>
 </main>
@@ -186,8 +185,9 @@
     <div class="foot-bottom"><span>© <span id="year">2026</span> DGIPlay Pvt. Ltd. All rights reserved.</span><span>CoachEaze (also spelt CoachEase) is a product of DGIPlay Pvt. Ltd., Pune, India</span></div>
   </div>
 </footer>
-<script>window.SPORT = {"name": "Cricket", "players": ["Aarav", "Yash", "Krish", "Om", "Vedant", "Ayaan", "Rudra", "Arjun", "Shaurya", "Kian", "Parth", "Neel"], "skills": ["Batting", "Bowling", "Fielding", "Fitness", "Game sense"], "coach": "Rahul", "player": "Aarav", "badge": "Century Maker", "story": {"without": [["6:15 am", "📒", "Roll call for 40 players across three nets. 12 minutes gone."], ["8:00 am", "📞", "Parents ask if their son made the match squad."], ["Evening", "💬", "Camp fees chased in five WhatsApp groups."], ["Month end", "🧮", "Coach payments worked out on a calculator."]], "with": [["6:30 am", "📸", "One photo per net. Everyone marked."], ["8:00 am", "📣", "Squad list announced to the U-14 batch."], ["Evening", "💸", "Camp fees paid online with receipts."], ["Month end", "✅", "Salaries calculated from real check-ins."]]}};</script>
+<script>window.SPORT = {"key": "cricket", "name": "Cricket", "players": ["Aarav", "Yash", "Krish", "Om", "Vedant", "Ayaan", "Rudra", "Arjun", "Shaurya", "Kian", "Parth", "Neel"], "skills": ["Batting", "Bowling", "Fielding", "Fitness", "Game sense"], "coach": "Rahul", "player": "Aarav", "badge": "Century Maker", "story": {"without": [["6:15 am", "📒", "Roll call for 40 players across three nets. 12 minutes gone."], ["8:00 am", "📞", "Parents ask if their son made the match squad."], ["Evening", "💬", "Camp fees chased in five WhatsApp groups."], ["Month end", "🧮", "Coach payments worked out on a calculator."]], "with": [["6:30 am", "📸", "One photo per net. Everyone marked."], ["8:00 am", "📣", "Squad list announced to the U-14 batch."], ["Evening", "💸", "Camp fees paid online with receipts."], ["Month end", "✅", "Salaries calculated from real check-ins."]]}, "academy": "Cover Drive Cricket Academy", "s2": "#fde68a"};</script>
 <script src="/assets/site.js" defer></script>
+<script src="/assets/fx.js" defer></script>
 <script src="/assets/sport.js" defer></script>
 </body>
 </html>

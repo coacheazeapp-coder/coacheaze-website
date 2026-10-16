@@ -20,6 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Acme&family=Barlow:wght@400;500;600;700&family=Exo+2:ital,wght@1,600&family=Barlow+Condensed:ital,wght@0,700;0,800;1,800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="stylesheet" href="/assets/sport.css">
+<script>try{if(localStorage.getItem("ce-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "CoachEaze for Football academies", "applicationCategory": "BusinessApplication", "operatingSystem": "Web, Android", "url": "https://coacheaze.com/football-academy-app/", "description": "CoachEaze is the football academy management app: one-photo attendance, coach check-in, passing, dribbling, shooting skill ratings, fees, salaries and a parent app. Free for 22 days.", "offers": {"@type": "AggregateOffer", "priceCurrency": "INR", "lowPrice": "999", "highPrice": "6049"}, "publisher": {"@type": "Organization", "name": "CoachEaze", "legalName": "DGIPlay Pvt. Ltd.", "url": "https://coacheaze.com/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "CoachEaze", "item": "https://coacheaze.com/"}, {"@type": "ListItem", "position": 2, "name": "Every sport", "item": "https://coacheaze.com/sports.html"}, {"@type": "ListItem", "position": 3, "name": "Football academy app", "item": "https://coacheaze.com/football-academy-app/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I run U-8 to U-17 football batches in one app?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Create a batch for every age group and ground, assign coaches and set timings."}}, {"@type": "Question", "name": "Can football coaches rate passing, dribbling and shooting?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Coaches rate any skill from 1 to 5 stars. Players earn badges as they improve."}}, {"@type": "Question", "name": "Does it work for football academies with several grounds?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Add each ground as a centre. Coach check-in works only within 150 m of the right ground."}}, {"@type": "Question", "name": "Is there a free trial?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every feature is free for 22 days, with no payment needed. Then pick the plan that fits your academy size."}}, {"@type": "Question", "name": "Do I need to install anything?", "acceptedAnswer": {"@type": "Answer", "text": "No. CoachEaze works in any browser at app.coacheaze.com, on phone, tablet or laptop. An Android app is coming soon."}}]}]}
 </script>
@@ -54,12 +55,9 @@
         <a class="btn btn-ghost btn-big" href="#roll">Try it right here ↓</a>
       </div>
     </div>
-    <div class="court" id="court" role="img" aria-label="A football session in progress">
-      <svg viewBox="0 0 400 240" preserveAspectRatio="none" aria-hidden="true"><rect width="400" height="240" fill="#2e9a4f"/><path d="M0 0h50v240H0zM100 0h50v240h-50zM200 0h50v240h-50zM300 0h50v240h-50z" fill="#ffffff10"/><rect x="16" y="16" width="368" height="208" stroke="#fff" stroke-width="2.5" fill="none"/><path d="M200 16V224M16 70H70V170H16M384 70H330V170H384" stroke="#fff" stroke-width="2" fill="none"/><circle cx="200" cy="120" r="34" stroke="#fff" stroke-width="2" fill="none"/></svg>
-      <span class="pl a">A</span><span class="pl b">I</span>
-      <span class="ball"><i>⚽</i></span>
-      <span class="score">Passes: <b>0</b></span>
-      <span class="tip">Tap the court to speed it up</span>
+    <div class="court" id="court">
+      <canvas id="game" tabindex="0" role="img" aria-label="Play a quick football game: penalty shoot-out"></canvas>
+    </div>
     </div>
   </div>
 </section>
@@ -78,11 +76,12 @@
     <div class="s-copy reveal">
       <span class="kicker">Try it · Attendance</span>
       <h2>Take today's roll in <em>one photo</em></h2>
-      <p>The coach points the phone at the batch and taps once. CoachEaze recognises every registered player and tells parents they've arrived. Then tap any player to mark them absent and see what their parent gets.</p>
+      <p>Practice is already on. Coach Sameer raises the phone and taps once, while players train and warm up. CoachEaze finds every registered face, marks them present and tells parents they've arrived. Then tap any player to mark them absent and see what their parent gets.</p>
       <div class="roll-bar"><button class="btn btn-play btn-big" id="rollBtn" type="button">📸 Snap the batch</button></div>
     </div>
     <div class="panel reveal d1">
       <div class="batch-head"><b>U-12 Strikers · 5:30 pm · Ground B</b><span>Golden Boot Football Academy</span></div>
+      <div class="scene"><canvas id="rollScene" role="img" aria-label="Coach Sameer photographs the batch while they train"></canvas></div>
       <div class="chips" id="chips"></div>
       <div class="s-status" id="rollStatus">12 players · waiting for the coach's photo</div>
     </div>
@@ -168,7 +167,7 @@
       <span class="url">or <a href="/#pricing" style="color:inherit">see pricing</a></span>
     </div>
     <div class="sec-head" style="margin:60px auto 20px"><span class="kicker">CoachEaze for every sport</span></div>
-    <nav class="others" aria-label="Sports"><a href="/badminton-academy-app/">🏸 Badminton</a><a href="/tennis-academy-app/">🎾 Tennis</a><a href="/cricket-academy-app/">🏏 Cricket</a><a href="/football-academy-app/" aria-current="page">⚽ Football</a><a href="/hockey-academy-app/">🏑 Hockey</a><a href="/swimming-academy-app/">🏊 Swimming</a><a href="/kabaddi-academy-app/">🤼 Kabaddi</a><a href="/volleyball-academy-app/">🏐 Volleyball</a><a href="/martial-arts-academy-app/">🥋 Martial Arts</a><a href="/sports.html">+ more sports</a></nav>
+    <nav class="others" aria-label="Sports"><a href="/badminton-academy-app/">🏸 Badminton</a><a href="/tennis-academy-app/">🎾 Tennis</a><a href="/cricket-academy-app/">🏏 Cricket</a><a href="/football-academy-app/" aria-current="page">⚽ Football</a><a href="/hockey-academy-app/">🏑 Hockey</a><a href="/swimming-academy-app/">🏊 Swimming</a><a href="/kabaddi-academy-app/">🤼 Kabaddi</a><a href="/volleyball-academy-app/">🏐 Volleyball</a><a href="/sports.html">+ more sports</a></nav>
   </div>
 </section>
 </main>
@@ -186,8 +185,9 @@
     <div class="foot-bottom"><span>© <span id="year">2026</span> DGIPlay Pvt. Ltd. All rights reserved.</span><span>CoachEaze (also spelt CoachEase) is a product of DGIPlay Pvt. Ltd., Pune, India</span></div>
   </div>
 </footer>
-<script>window.SPORT = {"name": "Football", "players": ["Ayaan", "Ishan", "Laksh", "Reyansh", "Advik", "Kabir", "Tanay", "Aryan", "Veer", "Shlok", "Atharv", "Nivaan"], "skills": ["Passing", "Dribbling", "Shooting", "Defending", "Fitness"], "coach": "Sameer", "player": "Ayaan", "badge": "Playmaker", "story": {"without": [["5:15 pm", "📋", "30 kids, one clipboard, three coaches asking who is here."], ["6:00 pm", "📞", "A parent asks why her son wasn't picked."], ["Night", "💬", "Fee reminders typed out for the third time."], ["Month end", "🧮", "Coach late marks argued over."]], "with": [["5:30 pm", "📸", "One team photo, 30 players marked."], ["6:00 pm", "📈", "Parents see skill ratings and coach notes."], ["Night", "💸", "Reminders and receipts sent automatically."], ["Month end", "✅", "Late marks from real check-ins. No arguments."]]}};</script>
+<script>window.SPORT = {"key": "football", "name": "Football", "players": ["Ayaan", "Ishan", "Laksh", "Reyansh", "Advik", "Kabir", "Tanay", "Aryan", "Veer", "Shlok", "Atharv", "Nivaan"], "skills": ["Passing", "Dribbling", "Shooting", "Defending", "Fitness"], "coach": "Sameer", "player": "Ayaan", "badge": "Playmaker", "story": {"without": [["5:15 pm", "📋", "30 kids, one clipboard, three coaches asking who is here."], ["6:00 pm", "📞", "A parent asks why her son wasn't picked."], ["Night", "💬", "Fee reminders typed out for the third time."], ["Month end", "🧮", "Coach late marks argued over."]], "with": [["5:30 pm", "📸", "One team photo, 30 players marked."], ["6:00 pm", "📈", "Parents see skill ratings and coach notes."], ["Night", "💸", "Reminders and receipts sent automatically."], ["Month end", "✅", "Late marks from real check-ins. No arguments."]]}, "academy": "Golden Boot Football Academy", "s2": "#a3e635"};</script>
 <script src="/assets/site.js" defer></script>
+<script src="/assets/fx.js" defer></script>
 <script src="/assets/sport.js" defer></script>
 </body>
 </html>

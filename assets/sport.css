@@ -12,30 +12,13 @@
 .crumbs { font-size: .85rem; color: rgba(255,255,255,.55); }
 .crumbs a { color: rgba(255,255,255,.75); text-decoration: none; }
 
-/* Court with a live rally */
-.court { position: relative; aspect-ratio: 400 / 240; border-radius: 22px; overflow: hidden; cursor: pointer; user-select: none;
-  box-shadow: 0 30px 60px -30px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.12); transform: perspective(900px) rotateX(8deg); }
-.court svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.court .ball { position: absolute; left: 14%; top: 50%; font-size: clamp(1.6rem, 3.4vw, 2.4rem); line-height: 1; transform: translate(-50%, -50%);
-  animation: rallyX 1.6s ease-in-out infinite alternate; filter: drop-shadow(0 8px 6px rgba(0,0,0,.35)); }
-.court .ball i { display: block; font-style: normal; animation: rallyY .8s ease-in-out infinite alternate; }
-.court.fast .ball { animation-duration: .8s; }
-.court.fast .ball i { animation-duration: .4s; }
-.court.flip .ball i { animation-name: rallyYflip; }
-.court .pl { position: absolute; top: 50%; width: 42px; height: 42px; margin: -21px 0 0 -21px; border-radius: 50%; display: grid; place-items: center;
-  font: 800 .9rem var(--display); color: #fff; box-shadow: 0 0 0 3px rgba(255,255,255,.85), 0 10px 18px -6px rgba(0,0,0,.6); }
-.court .pl.a { left: 8%; background: var(--royal); animation: plA 1.6s ease-in-out infinite alternate; }
-.court .pl.b { left: 92%; background: var(--coral); animation: plB 1.6s ease-in-out infinite alternate; }
-.court.fast .pl { animation-duration: .8s; }
-.court .score { position: absolute; left: 12px; top: 12px; background: rgba(10,15,44,.82); color: #fff; border-radius: 10px; padding: 6px 12px; font-weight: 800; font-size: .9rem; }
-.court .score b { color: var(--s2); font-size: 1.1rem; }
-.court .tip { position: absolute; right: 12px; bottom: 12px; background: rgba(255,255,255,.92); color: var(--night); border-radius: 10px; padding: 6px 10px; font-size: .78rem; font-weight: 700; }
-.court .tip::before { content: "👆 "; display: inline-block; animation: handTap 1.4s ease-in-out infinite; }
-@keyframes rallyX { from { left: 14%; } to { left: 86%; } }
-@keyframes rallyY { from { transform: translateY(18px) rotate(-20deg); } to { transform: translateY(-34px) rotate(25deg); } }
-@keyframes rallyYflip { from { transform: translateY(6px) scaleX(1); } to { transform: translateY(-6px) scaleX(1); } }
-@keyframes plA { from { top: 44%; } to { top: 58%; } }
-@keyframes plB { from { top: 58%; } to { top: 42%; } }
+/* Live field + mini-game (drawn by fx.js) */
+.court { position: relative; border-radius: 22px; overflow: hidden; background: #0c1442;
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.12); }
+.court canvas, .scene canvas { display: block; width: 100%; aspect-ratio: 800 / 500; touch-action: manipulation; cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; }
+.court canvas:focus-visible { box-shadow: inset 0 0 0 3px var(--s2); }
+.scene { border-radius: 16px; overflow: hidden; margin-bottom: 14px; background: #0c1442; box-shadow: 0 16px 34px -20px rgba(10,15,44,.7); }
+.scene canvas { aspect-ratio: 800 / 470; }
 
 /* Stat strip */
 .s-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: -40px; position: relative; z-index: 2; }
@@ -140,7 +123,6 @@
   .s-block.rev > :first-child { order: 0; }
   .s-stats { grid-template-columns: repeat(2, 1fr); }
   .s-feats { grid-template-columns: 1fr 1fr; }
-  .court { transform: none; }
 }
 @media (max-width: 560px) {
   .s-hero { padding: 36px 0 64px; }
@@ -149,5 +131,4 @@
   .moment { grid-template-columns: 64px 32px 1fr; gap: 10px; padding: 12px; }
   .moment time { font-size: 1rem; }
   .s-stat b { font-size: 2.1rem; }
-  .court .pl { width: 32px; height: 32px; margin: -16px 0 0 -16px; font-size: .75rem; }
 }

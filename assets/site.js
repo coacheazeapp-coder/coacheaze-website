@@ -1,5 +1,23 @@
 // CoachEaze website — small, dependency-free interactions.
 (function () {
+  // Light / dark toggle (light is the default; the choice is remembered on this device)
+  var bar = document.querySelector('.nav .wrap');
+  if (bar) {
+    var root = document.documentElement, tb = document.createElement('button');
+    tb.type = 'button'; tb.className = 'theme-btn';
+    var paint = function () {
+      var dark = root.getAttribute('data-theme') === 'dark';
+      tb.textContent = dark ? '☀️' : '🌙'; tb.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode'); tb.title = tb.getAttribute('aria-label');
+    };
+    tb.addEventListener('click', function () {
+      var dark = root.getAttribute('data-theme') !== 'dark';
+      if (dark) root.setAttribute('data-theme', 'dark'); else root.removeAttribute('data-theme');
+      try { localStorage.setItem('ce-theme', dark ? 'dark' : 'light'); } catch (e) {}
+      paint();
+    });
+    paint(); bar.insertBefore(tb, bar.querySelector('.menu-btn'));
+  }
+
   // Mobile menu
   var btn = document.querySelector('.menu-btn'), links = document.querySelector('.nav-links');
   if (btn && links) {

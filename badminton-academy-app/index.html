@@ -20,6 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Acme&family=Barlow:wght@400;500;600;700&family=Exo+2:ital,wght@1,600&family=Barlow+Condensed:ital,wght@0,700;0,800;1,800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="stylesheet" href="/assets/sport.css">
+<script>try{if(localStorage.getItem("ce-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "CoachEaze for Badminton academies", "applicationCategory": "BusinessApplication", "operatingSystem": "Web, Android", "url": "https://coacheaze.com/badminton-academy-app/", "description": "CoachEaze is the badminton academy management app: one-photo attendance, coach check-in, footwork, smash, net play skill ratings, fees, salaries and a parent app. Free for 22 days.", "offers": {"@type": "AggregateOffer", "priceCurrency": "INR", "lowPrice": "999", "highPrice": "6049"}, "publisher": {"@type": "Organization", "name": "CoachEaze", "legalName": "DGIPlay Pvt. Ltd.", "url": "https://coacheaze.com/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "CoachEaze", "item": "https://coacheaze.com/"}, {"@type": "ListItem", "position": 2, "name": "Every sport", "item": "https://coacheaze.com/sports.html"}, {"@type": "ListItem", "position": 3, "name": "Badminton academy app", "item": "https://coacheaze.com/badminton-academy-app/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I run multiple badminton courts and centres?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Add every centre and court-wise batch, assign coaches and set timings. Owners see everything in one dashboard."}}, {"@type": "Question", "name": "Can coaches rate badminton skills like footwork and smash?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Coaches rate any skill from 1 to 5 stars with notes. Parents and players see the ratings and progress over time."}}, {"@type": "Question", "name": "Does it handle monthly and quarterly badminton fees?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Set monthly, quarterly or annual fees and packages per batch. Reminders and receipts go out automatically."}}, {"@type": "Question", "name": "Is there a free trial?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every feature is free for 22 days, with no payment needed. Then pick the plan that fits your academy size."}}, {"@type": "Question", "name": "Do I need to install anything?", "acceptedAnswer": {"@type": "Answer", "text": "No. CoachEaze works in any browser at app.coacheaze.com, on phone, tablet or laptop. An Android app is coming soon."}}]}]}
 </script>
@@ -54,12 +55,9 @@
         <a class="btn btn-ghost btn-big" href="#roll">Try it right here ↓</a>
       </div>
     </div>
-    <div class="court" id="court" role="img" aria-label="A badminton session in progress">
-      <svg viewBox="0 0 400 240" preserveAspectRatio="none" aria-hidden="true"><rect width="400" height="240" fill="#1f8a5b"/><rect x="20" y="20" width="360" height="200" stroke="#fff" stroke-width="2.5" fill="none"/><path d="M20 36H380M20 204H380M140 20V220M260 20V220M20 120H140M260 120H380" stroke="#fff" stroke-width="2" fill="none"/><path d="M200 12V228" stroke="#fff" stroke-width="5" stroke-dasharray="4 3"/></svg>
-      <span class="pl a">R</span><span class="pl b">K</span>
-      <span class="ball"><i>🏸</i></span>
-      <span class="score">Rally: <b>0</b></span>
-      <span class="tip">Tap the court to speed it up</span>
+    <div class="court" id="court">
+      <canvas id="game" tabindex="0" role="img" aria-label="Play a quick badminton game: keep the rally going"></canvas>
+    </div>
     </div>
   </div>
 </section>
@@ -78,11 +76,12 @@
     <div class="s-copy reveal">
       <span class="kicker">Try it · Attendance</span>
       <h2>Take today's roll in <em>one photo</em></h2>
-      <p>The coach points the phone at the batch and taps once. CoachEaze recognises every registered player and tells parents they've arrived. Then tap any player to mark them absent and see what their parent gets.</p>
+      <p>Practice is already on. Coach Arjun raises the phone and taps once, while players train and warm up. CoachEaze finds every registered face, marks them present and tells parents they've arrived. Then tap any player to mark them absent and see what their parent gets.</p>
       <div class="roll-bar"><button class="btn btn-play btn-big" id="rollBtn" type="button">📸 Snap the batch</button></div>
     </div>
     <div class="panel reveal d1">
       <div class="batch-head"><b>U-13 Shuttlers · 6:00 pm · Court 1–2</b><span>Smash Point Academy</span></div>
+      <div class="scene"><canvas id="rollScene" role="img" aria-label="Coach Arjun photographs the batch while they train"></canvas></div>
       <div class="chips" id="chips"></div>
       <div class="s-status" id="rollStatus">12 players · waiting for the coach's photo</div>
     </div>
@@ -168,7 +167,7 @@
       <span class="url">or <a href="/#pricing" style="color:inherit">see pricing</a></span>
     </div>
     <div class="sec-head" style="margin:60px auto 20px"><span class="kicker">CoachEaze for every sport</span></div>
-    <nav class="others" aria-label="Sports"><a href="/badminton-academy-app/" aria-current="page">🏸 Badminton</a><a href="/tennis-academy-app/">🎾 Tennis</a><a href="/cricket-academy-app/">🏏 Cricket</a><a href="/football-academy-app/">⚽ Football</a><a href="/hockey-academy-app/">🏑 Hockey</a><a href="/swimming-academy-app/">🏊 Swimming</a><a href="/kabaddi-academy-app/">🤼 Kabaddi</a><a href="/volleyball-academy-app/">🏐 Volleyball</a><a href="/martial-arts-academy-app/">🥋 Martial Arts</a><a href="/sports.html">+ more sports</a></nav>
+    <nav class="others" aria-label="Sports"><a href="/badminton-academy-app/" aria-current="page">🏸 Badminton</a><a href="/tennis-academy-app/">🎾 Tennis</a><a href="/cricket-academy-app/">🏏 Cricket</a><a href="/football-academy-app/">⚽ Football</a><a href="/hockey-academy-app/">🏑 Hockey</a><a href="/swimming-academy-app/">🏊 Swimming</a><a href="/kabaddi-academy-app/">🤼 Kabaddi</a><a href="/volleyball-academy-app/">🏐 Volleyball</a><a href="/sports.html">+ more sports</a></nav>
   </div>
 </section>
 </main>
@@ -186,8 +185,9 @@
     <div class="foot-bottom"><span>© <span id="year">2026</span> DGIPlay Pvt. Ltd. All rights reserved.</span><span>CoachEaze (also spelt CoachEase) is a product of DGIPlay Pvt. Ltd., Pune, India</span></div>
   </div>
 </footer>
-<script>window.SPORT = {"name": "Badminton", "players": ["Riya", "Kabir", "Anaya", "Vihaan", "Ishaan", "Meera", "Aarav", "Diya", "Rohan", "Saanvi", "Tara", "Reyansh"], "skills": ["Footwork", "Smash", "Net play", "Defence", "Serve"], "coach": "Arjun", "player": "Riya", "badge": "Smash Star", "story": {"without": [["5:30 pm", "📒", "Coach Arjun hunts for the attendance register. Page 34 is torn."], ["6:10 pm", "📞", "A parent calls: “Did Riya come today?” Nobody is sure."], ["8:00 pm", "💬", "22 WhatsApp fee reminders, typed one by one."], ["Month end", "🧮", "Salary sheet in Excel. Late marks guessed from memory."]], "with": [["6:00 pm", "📸", "One photo of the batch. 16 players marked in seconds."], ["6:01 pm", "🔔", "Parents get “Riya reached practice” automatically."], ["8:00 pm", "💸", "Fee reminders and receipts went out by themselves."], ["Month end", "✅", "Salaries worked out from real check-ins. One click."]]}};</script>
+<script>window.SPORT = {"key": "badminton", "name": "Badminton", "players": ["Riya", "Kabir", "Anaya", "Vihaan", "Ishaan", "Meera", "Aarav", "Diya", "Rohan", "Saanvi", "Tara", "Reyansh"], "skills": ["Footwork", "Smash", "Net play", "Defence", "Serve"], "coach": "Arjun", "player": "Riya", "badge": "Smash Star", "story": {"without": [["5:30 pm", "📒", "Coach Arjun hunts for the attendance register. Page 34 is torn."], ["6:10 pm", "📞", "A parent calls: “Did Riya come today?” Nobody is sure."], ["8:00 pm", "💬", "22 WhatsApp fee reminders, typed one by one."], ["Month end", "🧮", "Salary sheet in Excel. Late marks guessed from memory."]], "with": [["6:00 pm", "📸", "One photo of the batch. 16 players marked in seconds."], ["6:01 pm", "🔔", "Parents get “Riya reached practice” automatically."], ["8:00 pm", "💸", "Fee reminders and receipts went out by themselves."], ["Month end", "✅", "Salaries worked out from real check-ins. One click."]]}, "academy": "Smash Point Academy", "s2": "#7cf5c4"};</script>
 <script src="/assets/site.js" defer></script>
+<script src="/assets/fx.js" defer></script>
 <script src="/assets/sport.js" defer></script>
 </body>
 </html>

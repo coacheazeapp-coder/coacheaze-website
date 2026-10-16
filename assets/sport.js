@@ -1,15 +1,7 @@
-// Sport landing pages: rally on the court, roll call, rate a player, with/without story, mini calculator.
+// Sport landing pages: roll call, rate a player, with/without story, mini calculator.
 (function () {
   var S = window.SPORT || {};
   var sleep = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
-
-  // Court: count the rally, tap to speed it up
-  var court = document.getElementById('court');
-  if (court) {
-    var n = 0, sc = court.querySelector('.score b'), ball = court.querySelector('.ball');
-    ball.addEventListener('animationiteration', function (e) { if (e.animationName === 'rallyX') { n++; sc.textContent = n; } });
-    court.addEventListener('click', function () { court.classList.toggle('fast'); });
-  }
 
   // Roll call: snap the batch, then tap a player to mark them absent
   var chips = document.getElementById('chips'), snap = document.getElementById('rollBtn'), rs = document.getElementById('rollStatus');
@@ -27,9 +19,12 @@
     snap.addEventListener('click', async function () {
       if (busy) return; busy = true; snap.classList.add('used');
       all.forEach(function (c) { c.classList.remove('on', 'off'); });
-      rs.className = 's-status'; rs.textContent = '📸 Recognising faces…';
+      var scene = window.CE_ROLL;
+      rs.className = 's-status'; rs.textContent = '📸 Coach ' + S.coach + ' takes the photo…';
       var t0 = performance.now();
-      for (var i = 0; i < all.length; i++) { all[i].classList.add('on'); await sleep(110); }
+      if (scene) await scene.snap();
+      rs.textContent = '🔍 Recognising faces…';
+      for (var i = 0; i < all.length; i++) { all[i].classList.add('on'); if (scene) scene.mark(i, 1); await sleep(80); }
       rs.className = 's-status good';
       rs.textContent = '✓ ' + all.length + ' of ' + all.length + ' present in ' + ((performance.now() - t0) / 1000).toFixed(1) + ' s. Parents notified. Now tap a player to mark them absent.';
       snap.textContent = '↻ Snap again'; busy = false; marked = true;
@@ -38,6 +33,7 @@
       var c = e.target.closest('.chip'); if (!c || busy) return;
       if (!marked) { rs.className = 's-status warn'; rs.textContent = 'Tap “Snap the batch” first. One photo marks everyone.'; return; }
       c.classList.toggle('off'); c.classList.toggle('on', !c.classList.contains('off'));
+      if (window.CE_ROLL) window.CE_ROLL.mark([].indexOf.call(all, c), c.classList.contains('off') ? 2 : 1);
       var k = count(), name = c.textContent.replace('✓', '').slice(1);
       if (c.classList.contains('off')) {
         rs.className = 's-status warn';
