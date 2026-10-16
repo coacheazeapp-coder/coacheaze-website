@@ -197,7 +197,6 @@ section { padding: 96px 0; }
 .btn-play:active { transform: scale(.96); }
 .btn-play::after { content: "👆"; position: absolute; right: -14px; bottom: -26px; font-size: 2rem; line-height: 1; pointer-events: none;
   filter: drop-shadow(0 4px 6px rgba(10,15,44,.35)); animation: handTap 1.4s ease-in-out infinite; transform-origin: 50% 100%; }
-.btn-play.used::after { display: none; }
 .btn-play.used { animation: playGrad 5s linear infinite; box-shadow: 0 14px 30px -12px rgba(103, 65, 217, .8); }
 @keyframes playGrad { to { background-position: 200% 0; } }
 @keyframes playShine { 0%, 40% { background-position: -150% 0; } 100% { background-position: 150% 0; } }
@@ -215,6 +214,10 @@ section { padding: 96px 0; }
 .try-tabs:not(.touched) .tab[aria-selected="false"]::after { content: ""; position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 0 rgba(255,122,89,.7); animation: dotPing 1.6s ease-out infinite; }
 @keyframes tabNudge { 0%, 70%, 100% { transform: none; } 78% { transform: translateY(-3px) rotate(-2deg); } 86% { transform: translateY(-1px) rotate(2deg); } }
 @keyframes dotPing { to { box-shadow: 0 0 0 9px rgba(255,122,89,0); } }
+.calc .slider:first-child { position: relative; }
+.calc .slider:first-child::after { content: "👆"; position: absolute; left: 18%; top: 100%; margin-top: -4px; font-size: 1.8rem; line-height: 1; pointer-events: none;
+  filter: drop-shadow(0 4px 6px rgba(10,15,44,.35)); animation: handSlide 2.6s ease-in-out infinite; }
+@keyframes handSlide { 0%, 100% { transform: translateX(0) rotate(-10deg); } 15% { transform: translateX(0) translateY(-4px) rotate(-14deg) scale(.9); } 55% { transform: translateX(150px) translateY(-4px) rotate(-6deg) scale(.9); } 75% { transform: translateX(150px) rotate(-10deg); } }
 .hint::before { content: "👆 "; display: inline-block; animation: handTap 1.4s ease-in-out infinite; }
 
 /* Face demo — real group photo */
