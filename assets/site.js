@@ -187,11 +187,11 @@
     });
     return best || [x, y];
   }
-  function runTo(x, y) {
+  function runTo(x, y, exact) {
     if (!map) return;
     var w = map.offsetWidth, h = map.offsetHeight;
     x = Math.min(Math.max(x, 24), w - 24); y = Math.min(Math.max(y, h * .3), h - 6);
-    var fit = clearOfPlaces(x, y); x = fit[0]; y = fit[1];
+    if (!exact) { var fit = clearOfPlaces(x, y); x = fit[0]; y = fit[1]; }
     var cs = getComputedStyle(coach), sx = parseFloat(cs.left), sy = parseFloat(cs.top);
     coach.style.transitionDuration = '0ms'; coach.style.left = sx + 'px'; coach.style.top = sy + 'px';
     var dist = Math.hypot(x - sx, y - sy), ms = Math.min(2400, Math.max(450, dist * 5.5));
@@ -231,7 +231,10 @@
     map.addEventListener('pointerup', function (e) { if (!dragging) return; dragging = false; var p = at(e); runTo(p[0], p[1]); });
     window.addEventListener('resize', placeMap);
     placeMap();
-    document.getElementById('checkinBtn').addEventListener('click', function () { this.classList.add('used'); runTo(cx + R * .6, cy + R * .55); });
+    document.getElementById('checkinBtn').addEventListener('click', function () {
+      // stand right beside the centre pin
+      this.classList.add('used'); runTo(cx + 20 + coach.offsetWidth * .42, cy - 2, true);
+    });
   }
 
   // 3) Time-saved calculator + the plan that fits
