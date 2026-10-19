@@ -300,27 +300,22 @@
   if (y) y.textContent = new Date().getFullYear();
 })();
 
-// Sport picker (home ribbon + sport-page nav): go straight to the chosen sport.
-document.querySelectorAll('select[data-sport-pick]').forEach(function (s) {
-  s.addEventListener('change', function () { if (s.value && s.value !== location.pathname) location.href = s.value; });
-});
-
-
-// Home "Find your sport" dropdown + Play
-(function () {
-  var trig = document.getElementById('sportTrigger'), list = document.getElementById('sportList'), go = document.getElementById('sportGo');
-  if (!trig || !list || !go) return;
-  var box = trig.closest('.sport-pick'), val = trig.querySelector('.sp-val'), items = [].slice.call(list.querySelectorAll('li')), chosen = null;
-  val.classList.add('empty');
-  function open(o) { list.hidden = !o; trig.setAttribute('aria-expanded', o ? 'true' : 'false'); if (o) (chosen || items[0]).focus(); }
-  function pick(li) {
-    chosen = li; items.forEach(function (x) { x.setAttribute('aria-selected', x === li ? 'true' : 'false'); });
-    val.innerHTML = li.innerHTML; val.classList.remove('empty'); box.classList.remove('nudge');
-    go.textContent = '▶ Play ' + li.lastChild.textContent.trim(); open(false); trig.focus();
+// Sport dropdown (home "Find your sport" and the sport-page menu).
+function sportDropdown(dd, onPick) {
+  var trig = dd.querySelector('.sp-trigger'), list = dd.querySelector('.sp-list'), items = [].slice.call(list.querySelectorAll('li'));
+  function open(o) {
+    list.hidden = !o; trig.setAttribute('aria-expanded', o ? 'true' : 'false');
+    if (o) (items.filter(function (x) { return x.getAttribute('aria-selected') === 'true'; })[0] || items[0]).focus();
   }
-  trig.addEventListener('click', function () { open(list.hidden); });
+  function pick(li) {
+    items.forEach(function (x) { x.setAttribute('aria-selected', x === li ? 'true' : 'false'); });
+    trig.querySelector('.sp-val').innerHTML = li.innerHTML; trig.querySelector('.sp-val').classList.remove('empty');
+    open(false); trig.focus(); onPick(li);
+  }
+  trig.addEventListener('click', function (e) { e.stopPropagation(); open(list.hidden); });
+  trig.addEventListener('keydown', function (e) { if (e.key === 'ArrowDown') { e.preventDefault(); open(true); } });
   items.forEach(function (li, i) {
-    li.addEventListener('click', function () { pick(li); });
+    li.addEventListener('click', function (e) { e.stopPropagation(); pick(li); });
     li.addEventListener('keydown', function (e) {
       var k = e.key, n = items.length;
       if (k === 'Enter' || k === ' ') { e.preventDefault(); pick(li); }
@@ -329,11 +324,27 @@ document.querySelectorAll('select[data-sport-pick]').forEach(function (s) {
       else if (k === 'ArrowUp' || k === 'ArrowLeft') { e.preventDefault(); items[(i - 1 + n) % n].focus(); }
     });
   });
-  trig.addEventListener('keydown', function (e) { if (e.key === 'ArrowDown') { e.preventDefault(); open(true); } });
-  document.addEventListener('click', function (e) { if (!list.hidden && !e.target.closest('.sp-dd')) open(false); });
+  document.addEventListener('click', function (e) { if (!list.hidden && !dd.contains(e.target)) open(false); });
+  return { open: open };
+}
+
+// Sport pages: switching sport in the menu goes straight there.
+[].forEach.call(document.querySelectorAll('[data-nav-pick]'), function (dd) {
+  sportDropdown(dd, function (li) { var h = li.getAttribute('data-href'); if (h && h !== location.pathname) location.href = h; });
+});
+
+// Home: choose a sport, then Play.
+(function () {
+  var trig = document.getElementById('sportTrigger'), go = document.getElementById('sportGo');
+  if (!trig || !go) return;
+  var dd = trig.closest('.sp-dd'), box = trig.closest('.sport-pick'), chosen = null;
+  trig.querySelector('.sp-val').classList.add('empty');
+  var api = sportDropdown(dd, function (li) {
+    chosen = li; box.classList.remove('nudge'); go.textContent = '▶ Play ' + li.lastChild.textContent.trim();
+  });
   go.addEventListener('click', function (e) {
     e.stopPropagation();
     if (chosen) { location.href = chosen.getAttribute('data-href'); return; }
-    box.classList.remove('nudge'); void box.offsetWidth; box.classList.add('nudge'); open(true);
+    box.classList.remove('nudge'); void box.offsetWidth; box.classList.add('nudge'); api.open(true);
   });
 })();
