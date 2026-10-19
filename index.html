@@ -78,7 +78,7 @@
       <h1 class="reveal d1">Every medal has <em style="white-space:nowrap">a coach</em> <span style="white-space:nowrap">behind it.</span></h1>
       <p class="lead reveal d2">Registers, fee follow-ups, salary sheets and so much more: CoachEaze takes it all off your hands, so your coaches can spend their time on court.</p>
       <div class="hero-cta reveal d3">
-        <a class="btn btn-primary btn-big" href="https://app.coacheaze.com">Open CoachEaze <svg><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-primary btn-big" href="https://app.coacheaze.com">Open CoachEaze App <svg><use href="#i-arrow"/></svg></a>
         <a class="btn btn-ghost btn-big" href="#films"><svg><use href="#i-play"/></svg> Watch the film</a>
       </div>
       <div class="hero-note reveal d4">
@@ -106,7 +106,19 @@
       <a class="sport" href="badminton-academy-app/">🏸 Badminton</a><a class="sport" href="cricket-academy-app/">🏏 Cricket</a><a class="sport" href="football-academy-app/">⚽ Football</a><a class="sport" href="tennis-academy-app/">🎾 Tennis</a><a class="sport" href="swimming-academy-app/">🏊 Swimming</a><a class="sport" href="hockey-academy-app/">🏑 Hockey</a><a class="sport" href="volleyball-academy-app/">🏐 Volleyball</a><a class="sport" href="kabaddi-academy-app/">🤼 Kabaddi</a><a class="sport" href="badminton-academy-app/">🏸 Badminton</a><a class="sport" href="cricket-academy-app/">🏏 Cricket</a><a class="sport" href="football-academy-app/">⚽ Football</a><a class="sport" href="tennis-academy-app/">🎾 Tennis</a><a class="sport" href="swimming-academy-app/">🏊 Swimming</a><a class="sport" href="hockey-academy-app/">🏑 Hockey</a><a class="sport" href="volleyball-academy-app/">🏐 Volleyball</a><a class="sport" href="kabaddi-academy-app/">🤼 Kabaddi</a><a class="sport" href="badminton-academy-app/" aria-hidden="true" tabindex="-1">🏸 Badminton</a><a class="sport" href="cricket-academy-app/" aria-hidden="true" tabindex="-1">🏏 Cricket</a><a class="sport" href="football-academy-app/" aria-hidden="true" tabindex="-1">⚽ Football</a><a class="sport" href="tennis-academy-app/" aria-hidden="true" tabindex="-1">🎾 Tennis</a><a class="sport" href="swimming-academy-app/" aria-hidden="true" tabindex="-1">🏊 Swimming</a><a class="sport" href="hockey-academy-app/" aria-hidden="true" tabindex="-1">🏑 Hockey</a><a class="sport" href="volleyball-academy-app/" aria-hidden="true" tabindex="-1">🏐 Volleyball</a><a class="sport" href="kabaddi-academy-app/" aria-hidden="true" tabindex="-1">🤼 Kabaddi</a><a class="sport" href="badminton-academy-app/" aria-hidden="true" tabindex="-1">🏸 Badminton</a><a class="sport" href="cricket-academy-app/" aria-hidden="true" tabindex="-1">🏏 Cricket</a><a class="sport" href="football-academy-app/" aria-hidden="true" tabindex="-1">⚽ Football</a><a class="sport" href="tennis-academy-app/" aria-hidden="true" tabindex="-1">🎾 Tennis</a><a class="sport" href="swimming-academy-app/" aria-hidden="true" tabindex="-1">🏊 Swimming</a><a class="sport" href="hockey-academy-app/" aria-hidden="true" tabindex="-1">🏑 Hockey</a><a class="sport" href="volleyball-academy-app/" aria-hidden="true" tabindex="-1">🏐 Volleyball</a><a class="sport" href="kabaddi-academy-app/" aria-hidden="true" tabindex="-1">🤼 Kabaddi</a>
     </div>
   </div>
-  <div class="ribbon-cta"><a class="btn btn-play" href="sports.html">🏆 Find your sport: snap the batch, run fee day <span aria-hidden="true">→</span></a></div>
+  <div class="ribbon-cta" id="sports">
+    <div class="sport-pick">
+      <span class="sp-label">🏆 Find your sport</span>
+      <div class="sp-row">
+        <div class="sp-dd">
+          <button class="sp-trigger" id="sportTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="sportList"><span class="sp-val">Choose your sport</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <ul class="sp-list" id="sportList" role="listbox" aria-label="Sports" hidden><li role="option" tabindex="-1" data-href="/badminton-academy-app/" aria-selected="false"><span class="sp-ico">🏸</span>Badminton</li><li role="option" tabindex="-1" data-href="/cricket-academy-app/" aria-selected="false"><span class="sp-ico">🏏</span>Cricket</li><li role="option" tabindex="-1" data-href="/football-academy-app/" aria-selected="false"><span class="sp-ico">⚽</span>Football</li><li role="option" tabindex="-1" data-href="/tennis-academy-app/" aria-selected="false"><span class="sp-ico">🎾</span>Tennis</li><li role="option" tabindex="-1" data-href="/swimming-academy-app/" aria-selected="false"><span class="sp-ico">🏊</span>Swimming</li><li role="option" tabindex="-1" data-href="/hockey-academy-app/" aria-selected="false"><span class="sp-ico">🏑</span>Hockey</li><li role="option" tabindex="-1" data-href="/volleyball-academy-app/" aria-selected="false"><span class="sp-ico">🏐</span>Volleyball</li><li role="option" tabindex="-1" data-href="/kabaddi-academy-app/" aria-selected="false"><span class="sp-ico">🤼</span>Kabaddi</li></ul>
+        </div>
+        <button class="sp-go" id="sportGo" type="button">▶ Play</button>
+      </div>
+    </div>
+    <p class="sport-pick-note">Same CoachEaze app for every sport. Pick yours and play: snap the batch, run fee day.</p>
+  </div>
 </div>
 
 <!-- ── Features ─────────────────────────────────────────────────────── -->
@@ -389,7 +401,7 @@
   <div class="cta reveal">
     <h2>Ready when <em>your whistle</em> blows.</h2>
     <p>Join the academies that spend less time on paperwork and more time on court.</p>
-    <a class="btn btn-primary btn-big" href="https://app.coacheaze.com">Open CoachEaze <svg><use href="#i-arrow"/></svg></a>
+    <a class="btn btn-primary btn-big" href="https://app.coacheaze.com">Open CoachEaze App <svg><use href="#i-arrow"/></svg></a>
     <span class="url">app.coacheaze.com</span>
   </div>
 </div>
@@ -402,7 +414,7 @@
         <a class="brand" href="./"><img src="assets/img/logo.png" alt="" width="44" height="44"><span><span class="brand-name">Coach<span>Eaze</span></span><span class="brand-tag">Where coaching meets its match</span></span></a>
         <p style="margin:18px 0 0;max-width:34ch">Academy management for every sport: attendance, fees, salaries, progress and a parent app.</p>
       </div>
-      <div><h4>Product</h4><ul><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="sports.html">Every sport</a></li><li><a href="#films">Watch the film</a></li><li><a href="https://app.coacheaze.com">Open the app</a></li></ul></div>
+      <div><h4>Product</h4><ul><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#sports">Every sport</a></li><li><a href="#films">Watch the film</a></li><li><a href="https://app.coacheaze.com">Open the app</a></li></ul></div>
       <div><h4>Policies</h4><ul><li><a href="terms.html">Terms & Conditions</a></li><li><a href="privacy.html">Privacy Policy</a></li><li><a href="refund.html">Refund & Cancellation</a></li><li><a href="shipping.html">Shipping & Delivery</a></li></ul></div>
       <div><h4>Contact</h4><ul class="addr"><li><a href="mailto:support@coacheaze.com">support@coacheaze.com</a></li><li><a href="tel:+918861479099">+91 88614 79099</a></li><li><a href="contact.html">Contact us</a></li></ul></div>
     </div>

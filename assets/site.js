@@ -299,3 +299,41 @@
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 })();
+
+// Sport picker (home ribbon + sport-page nav): go straight to the chosen sport.
+document.querySelectorAll('select[data-sport-pick]').forEach(function (s) {
+  s.addEventListener('change', function () { if (s.value && s.value !== location.pathname) location.href = s.value; });
+});
+
+
+// Home "Find your sport" dropdown + Play
+(function () {
+  var trig = document.getElementById('sportTrigger'), list = document.getElementById('sportList'), go = document.getElementById('sportGo');
+  if (!trig || !list || !go) return;
+  var box = trig.closest('.sport-pick'), val = trig.querySelector('.sp-val'), items = [].slice.call(list.querySelectorAll('li')), chosen = null;
+  val.classList.add('empty');
+  function open(o) { list.hidden = !o; trig.setAttribute('aria-expanded', o ? 'true' : 'false'); if (o) (chosen || items[0]).focus(); }
+  function pick(li) {
+    chosen = li; items.forEach(function (x) { x.setAttribute('aria-selected', x === li ? 'true' : 'false'); });
+    val.innerHTML = li.innerHTML; val.classList.remove('empty'); box.classList.remove('nudge');
+    go.textContent = '▶ Play ' + li.lastChild.textContent.trim(); open(false); trig.focus();
+  }
+  trig.addEventListener('click', function () { open(list.hidden); });
+  items.forEach(function (li, i) {
+    li.addEventListener('click', function () { pick(li); });
+    li.addEventListener('keydown', function (e) {
+      var k = e.key, n = items.length;
+      if (k === 'Enter' || k === ' ') { e.preventDefault(); pick(li); }
+      else if (k === 'Escape') { open(false); trig.focus(); }
+      else if (k === 'ArrowDown' || k === 'ArrowRight') { e.preventDefault(); items[(i + 1) % n].focus(); }
+      else if (k === 'ArrowUp' || k === 'ArrowLeft') { e.preventDefault(); items[(i - 1 + n) % n].focus(); }
+    });
+  });
+  trig.addEventListener('keydown', function (e) { if (e.key === 'ArrowDown') { e.preventDefault(); open(true); } });
+  document.addEventListener('click', function (e) { if (!list.hidden && !e.target.closest('.sp-dd')) open(false); });
+  go.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (chosen) { location.href = chosen.getAttribute('data-href'); return; }
+    box.classList.remove('nudge'); void box.offsetWidth; box.classList.add('nudge'); open(true);
+  });
+})();

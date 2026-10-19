@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/assets/sport.css">
 <script>try{if(localStorage.getItem("ce-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "CoachEaze for Badminton academies", "applicationCategory": "BusinessApplication", "operatingSystem": "Web, Android", "url": "https://coacheaze.com/badminton-academy-app/", "description": "CoachEaze is the badminton academy management app: one-photo attendance, coach check-in, footwork, smash, net play skill ratings, fees, salaries and a parent app. Free for 22 days.", "offers": {"@type": "AggregateOffer", "priceCurrency": "INR", "lowPrice": "999", "highPrice": "6049"}, "publisher": {"@type": "Organization", "name": "CoachEaze", "legalName": "DGIPlay (OPC) Private Limited", "url": "https://coacheaze.com/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "CoachEaze", "item": "https://coacheaze.com/"}, {"@type": "ListItem", "position": 2, "name": "Every sport", "item": "https://coacheaze.com/sports.html"}, {"@type": "ListItem", "position": 3, "name": "Badminton academy app", "item": "https://coacheaze.com/badminton-academy-app/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I run multiple badminton courts and centres?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Add every centre and court-wise batch, assign coaches and set timings. Owners see everything in one dashboard."}}, {"@type": "Question", "name": "Can coaches rate badminton skills like footwork and smash?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Coaches rate any skill from 1 to 5 stars with notes. Parents and players see the ratings and progress over time."}}, {"@type": "Question", "name": "Does it handle monthly and quarterly badminton fees?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Set monthly, quarterly or annual fees and packages per batch. Reminders and receipts go out automatically."}}, {"@type": "Question", "name": "Is there a free trial?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every feature is free for 22 days, with no payment needed. Then pick the plan that fits your academy size."}}, {"@type": "Question", "name": "Do I need to install anything?", "acceptedAnswer": {"@type": "Answer", "text": "No. CoachEaze works in any browser at app.coacheaze.com, on phone, tablet or laptop. An Android app is coming soon."}}]}]}
+{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "CoachEaze for Badminton academies", "applicationCategory": "BusinessApplication", "operatingSystem": "Web, Android", "url": "https://coacheaze.com/badminton-academy-app/", "description": "CoachEaze is the badminton academy management app: one-photo attendance, coach check-in, footwork, smash, net play skill ratings, fees, salaries and a parent app. Free for 22 days.", "offers": {"@type": "AggregateOffer", "priceCurrency": "INR", "lowPrice": "999", "highPrice": "6049"}, "publisher": {"@type": "Organization", "name": "CoachEaze", "legalName": "DGIPlay (OPC) Private Limited", "url": "https://coacheaze.com/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "CoachEaze", "item": "https://coacheaze.com/"}, {"@type": "ListItem", "position": 2, "name": "Every sport", "item": "https://coacheaze.com/#sports"}, {"@type": "ListItem", "position": 3, "name": "Badminton academy app", "item": "https://coacheaze.com/badminton-academy-app/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I run multiple badminton courts and centres?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Add every centre and court-wise batch, assign coaches and set timings. Owners see everything in one dashboard."}}, {"@type": "Question", "name": "Can coaches rate badminton skills like footwork and smash?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Coaches rate any skill from 1 to 5 stars with notes. Parents and players see the ratings and progress over time."}}, {"@type": "Question", "name": "Does it handle monthly and quarterly badminton fees?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Set monthly, quarterly or annual fees and packages per batch. Reminders and receipts go out automatically."}}, {"@type": "Question", "name": "Is there a free trial?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every feature is free for 22 days, with no payment needed. Then pick the plan that fits your academy size."}}, {"@type": "Question", "name": "Do I need to install anything?", "acceptedAnswer": {"@type": "Answer", "text": "No. CoachEaze works in any browser at app.coacheaze.com, on phone, tablet or laptop. An Android app is coming soon."}}]}]}
 </script>
 </head>
 <body style="--s1:#14c6b4;--s2:#7cf5c4">
@@ -36,7 +36,7 @@
       <a href="#roll">Try it</a>
       <a href="#story">A day</a>
       <a href="/#pricing">Pricing</a>
-      <a href="/sports.html">Every sport</a>
+      <select class="nav-sport" data-sport-pick aria-label="Choose your sport"><option value="/badminton-academy-app/" selected>🏸 Badminton</option><option value="/cricket-academy-app/">🏏 Cricket</option><option value="/football-academy-app/">⚽ Football</option><option value="/tennis-academy-app/">🎾 Tennis</option><option value="/swimming-academy-app/">🏊 Swimming</option><option value="/hockey-academy-app/">🏑 Hockey</option><option value="/volleyball-academy-app/">🏐 Volleyball</option><option value="/kabaddi-academy-app/">🤼 Kabaddi</option></select>
       <a class="btn btn-primary btn-small" href="https://app.coacheaze.com/register-academy/free-trial">Start free trial</a>
     </nav>
     <button class="menu-btn" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -46,7 +46,7 @@
 <section class="s-hero">
   <div class="wrap s-hero-grid">
     <div>
-      <div class="crumbs"><a href="/">CoachEaze</a> › <a href="/sports.html">Every sport</a> › Badminton</div>
+      <div class="crumbs"><a href="/">CoachEaze</a> › Badminton</div>
       <span class="kicker" style="display:block;margin-top:14px">🏸 For badminton academies</span>
       <h1>Badminton academy <em>management app</em></h1>
       <p class="lead">Shuttlers on four courts, three batches before school and five after. CoachEaze marks every batch with one photo, rates footwork and smashes, collects fees on time and keeps parents smiling.</p>
@@ -56,6 +56,7 @@
       </div>
     </div>
     <div class="court" id="court">
+      <img class="ce-badge" src="/assets/img/logo.png" alt="CoachEaze" width="26" height="26">
       <canvas id="game" tabindex="0" role="img" aria-label="Play a quick badminton game: keep the rally going"></canvas>
     </div>
     </div>
@@ -81,7 +82,7 @@
     </div>
     <div class="panel reveal d1">
       <div class="batch-head"><b>U-13 Shuttlers · 6:00 pm · Court 1–2</b><span>Smash Point Academy</span></div>
-      <div class="scene"><canvas id="rollScene" role="img" aria-label="Coach Arjun photographs the batch while they train"></canvas></div>
+      <div class="scene"><canvas id="rollScene" role="img" aria-label="Coach Arjun photographs the batch while they train"></canvas><img class="ce-badge" src="/assets/img/logo.png" alt="CoachEaze" width="26" height="26"></div>
       <div class="chips" id="chips"></div>
       <div class="s-status" id="rollStatus">12 players · waiting for the coach's photo</div>
     </div>
@@ -96,7 +97,7 @@
       <p>Parents pay Coach Arjun in cash and UPI all evening. Tick everyone who paid and mark them all at once. Collected and pending add up by themselves, and each parent sees their fee status in the app. Start fee day and keep up!</p>
     </div>
     <div class="panel reveal d1">
-      <div class="rate-wrap">
+      <div class="rate-wrap fee-panel">
         <div>
           <div class="fee-top"><div><small>Collected</small><b id="feeGot">₹0</b></div><div class="due"><small>Still due</small><b id="feeDue">₹0</b></div></div>
           <div class="fee-bar"><i id="feeBar"></i></div>
@@ -104,7 +105,7 @@
           <button class="btn btn-play fee-go" id="feeGo" type="button">▶ Start fee day</button>
           <div class="s-status" id="feeStatus">8 parents owe this month's fee.</div>
         </div>
-        <div class="pphone"><div class="notch"></div><div class="ph-title">Riya's parent · app</div><div class="pcard"><small>This month's fee</small><b>₹3,500</b><span class="st" id="feePst">Due</span><div id="feeDate" style="font-size:.72rem;color:rgba(255,255,255,.55);margin-top:6px">Pay at the academy</div></div><div class="pnote">💡 Parents see Paid or Due here, so nobody has to chase anyone.<small>CoachEaze</small></div></div>
+        <div class="pphone" style="position:relative"><div class="notch"></div><div class="ph-title">Riya's parent · app</div><div class="pcard"><small>This month's fee</small><b>₹3,500</b><span class="st" id="feePst">Due</span><div id="feeDate" style="font-size:.72rem;color:rgba(255,255,255,.55);margin-top:6px">Pay at the academy</div></div><div class="pnote">💡 Parents see Paid or Due here, so nobody has to chase anyone.<small>CoachEaze</small></div><img class="ce-badge" src="/assets/img/logo.png" alt="CoachEaze" width="26" height="26"></div>
       </div>
     </div>
     </div>
@@ -169,7 +170,7 @@
       <span class="url">or <a href="/#pricing" style="color:inherit">see pricing</a></span>
     </div>
     <div class="sec-head" style="margin:60px auto 20px"><span class="kicker">CoachEaze for every sport</span></div>
-    <nav class="others" aria-label="Sports"><a href="/badminton-academy-app/" aria-current="page">🏸 Badminton</a><a href="/tennis-academy-app/">🎾 Tennis</a><a href="/cricket-academy-app/">🏏 Cricket</a><a href="/football-academy-app/">⚽ Football</a><a href="/hockey-academy-app/">🏑 Hockey</a><a href="/swimming-academy-app/">🏊 Swimming</a><a href="/kabaddi-academy-app/">🤼 Kabaddi</a><a href="/volleyball-academy-app/">🏐 Volleyball</a><a href="/sports.html">+ more sports</a></nav>
+    <nav class="others" aria-label="Sports"><a href="/badminton-academy-app/" aria-current="page">🏸 Badminton</a><a href="/tennis-academy-app/">🎾 Tennis</a><a href="/cricket-academy-app/">🏏 Cricket</a><a href="/football-academy-app/">⚽ Football</a><a href="/hockey-academy-app/">🏑 Hockey</a><a href="/swimming-academy-app/">🏊 Swimming</a><a href="/kabaddi-academy-app/">🤼 Kabaddi</a><a href="/volleyball-academy-app/">🏐 Volleyball</a><a href="/#sports">+ more sports</a></nav>
   </div>
 </section>
 </main>
@@ -180,7 +181,7 @@
         <a class="brand" href="/"><img src="/assets/img/logo.png" alt="" width="44" height="44"><span><span class="brand-name">Coach<span>Eaze</span></span><span class="brand-tag">Where coaching meets its match</span></span></a>
         <p style="margin:18px 0 0;max-width:34ch">Academy management for every sport: attendance, fees, salaries, progress and a parent app.</p>
       </div>
-      <div><h4>Product</h4><ul><li><a href="/#features">Features</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/sports.html">Every sport</a></li><li><a href="/#films">Watch the film</a></li><li><a href="https://app.coacheaze.com">Open the app</a></li></ul></div>
+      <div><h4>Product</h4><ul><li><a href="/#features">Features</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/#sports">Every sport</a></li><li><a href="/#films">Watch the film</a></li><li><a href="https://app.coacheaze.com">Open the app</a></li></ul></div>
       <div><h4>Policies</h4><ul><li><a href="/terms.html">Terms & Conditions</a></li><li><a href="/privacy.html">Privacy Policy</a></li><li><a href="/refund.html">Refund & Cancellation</a></li><li><a href="/shipping.html">Shipping & Delivery</a></li></ul></div>
       <div><h4>Contact</h4><ul class="addr"><li><a href="mailto:support@coacheaze.com">support@coacheaze.com</a></li><li><a href="tel:+918861479099">+91 88614 79099</a></li><li><a href="/contact.html">Contact us</a></li></ul></div>
     </div>

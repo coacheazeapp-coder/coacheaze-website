@@ -1,5 +1,5 @@
 // Sport pages: a live field with players, a different mini-game per sport, and the roll-call photo scene.
-// Everything is drawn on canvas: no images, no libraries. window.SPORT.key picks the sport.
+// The arcade games are drawn on canvas (no libraries), with a photo-like finish. window.SPORT.key picks the sport.
 (function () {
   var S = window.SPORT || {}, KEY = S.key || 'badminton';
   var PI = Math.PI, TAU = PI * 2;
@@ -19,6 +19,27 @@
     ctx.fillStyle = col; ctx.fillText(s, x, y);
   }
 
+  // ── Photo-like finish: turf/court grain, sunlight from above, lens vignette ──
+  var GRAIN = (function () {
+    var c = document.createElement('canvas'); c.width = c.height = 128;
+    var g = c.getContext('2d'), d = g.createImageData(128, 128);
+    for (var i = 0; i < d.data.length; i += 4) { var v = 128 + (Math.random() - .5) * 255 | 0; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; }
+    g.putImageData(d, 0, 0); return c;
+  })();
+  var grainPat = null;
+  function grain(ctx) { return grainPat || (grainPat = ctx.createPattern(GRAIN, 'repeat')); }
+  function finish(ctx, W, H) {
+    ctx.save();
+    var lg = ctx.createLinearGradient(0, 0, 0, H);
+    lg.addColorStop(0, 'rgba(255,240,205,.12)'); lg.addColorStop(.45, 'rgba(255,255,255,0)'); lg.addColorStop(1, 'rgba(0,0,0,.14)');
+    ctx.fillStyle = lg; ctx.fillRect(0, 0, W, H);
+    var rg = ctx.createRadialGradient(W / 2, H * .55, Math.min(W, H) * .38, W / 2, H * .55, Math.max(W, H) * .78);
+    rg.addColorStop(0, 'rgba(0,0,0,0)'); rg.addColorStop(1, 'rgba(0,0,0,.34)');
+    ctx.fillStyle = rg; ctx.fillRect(0, 0, W, H);
+    ctx.globalAlpha = .07; ctx.globalCompositeOperation = 'overlay'; ctx.fillStyle = grain(ctx); ctx.fillRect(0, 0, W, H);
+    ctx.restore();
+  }
+
   // ── Stage: sizes the canvas, runs the loop only while on screen ─────
   function stage(cv, W, H, frame) {
     var ctx = cv.getContext('2d'), st = { W: W, H: H, scale: 1, ui: 1, dpr: 1, vis: true };
@@ -33,7 +54,7 @@
     var last = performance.now(), t = 0;
     (function loop(now) {
       var dt = Math.min(.05, (now - last) / 1000); last = now;
-      if (st.vis) { t += dt; ctx.setTransform(st.dpr * st.scale, 0, 0, st.dpr * st.scale, 0, 0); frame(ctx, t, dt, st); }
+      if (st.vis) { t += dt; ctx.setTransform(st.dpr * st.scale, 0, 0, st.dpr * st.scale, 0, 0); frame(ctx, t, dt, st); finish(ctx, W, H); }
       requestAnimationFrame(loop);
     })(last);
     st.local = function (ev) { var r = cv.getBoundingClientRect(); return { x: (ev.clientX - r.left) / r.width * W, y: (ev.clientY - r.top) / r.height * H }; };
@@ -133,6 +154,16 @@
       }
     }
     if (key === 'swimming') { pool(ctx, c, t, o.lanes || 6); return; }
+    // Depth + surface: the far end recedes into haze, the near end is lit; a
+    // fine grain makes grass/court read as a real surface.
+    var a0 = c.p(.5, 0), a1 = c.p(.5, 1), dg = ctx.createLinearGradient(0, a0[1], 0, a1[1]);
+    dg.addColorStop(0, 'rgba(10,20,40,.26)'); dg.addColorStop(.55, 'rgba(0,0,0,0)'); dg.addColorStop(1, 'rgba(255,255,230,.07)');
+    ctx.save(); ctx.beginPath();
+    if (key === 'cricket') Lines(ctx, c).ell(.5, .5, .55, .6, 0, TAU);
+    else [[-.1, -.1], [1.1, -.1], [1.1, 1.14], [-.1, 1.14]].forEach(function (q, i) { var pp = c.p(q[0], q[1]); i ? ctx.lineTo(pp[0], pp[1]) : ctx.moveTo(pp[0], pp[1]); });
+    ctx.closePath(); ctx.fillStyle = dg; ctx.fill();
+    ctx.globalAlpha = F.indoor ? .05 : .09; ctx.globalCompositeOperation = 'overlay'; ctx.fillStyle = grain(ctx); ctx.fill();
+    ctx.restore();
     if (key === 'cricket') {
       poly(ctx, c, [[.2, .43], [.8, .43], [.8, .57], [.2, .57]], '#d6b97f');
       ctx.strokeStyle = 'rgba(255,255,255,.95)'; ctx.lineWidth = 2; ctx.beginPath(); var Lc = Lines(ctx, c); Lc.seg(.26, .43, .26, .57); Lc.seg(.74, .43, .74, .57); Lc.seg(.2, .45, .26, .45); Lc.seg(.2, .55, .26, .55); Lc.seg(.74, .45, .8, .45); Lc.seg(.74, .55, .8, .55); ctx.stroke();
@@ -145,7 +176,7 @@
       for (var d = 0; d < 8; d++) { var du = d * .16 - ((o.scroll || 0) % .16); Lp.seg(du, .5, du + .04, .5); }
       ctx.stroke(); return;
     }
-    ctx.strokeStyle = 'rgba(255,255,255,.92)'; ctx.lineWidth = 2.2; ctx.beginPath(); F.lines(Lines(ctx, c)); ctx.stroke();
+    ctx.strokeStyle = 'rgba(255,255,255,.82)'; ctx.lineWidth = 2.2; ctx.beginPath(); F.lines(Lines(ctx, c)); ctx.stroke();
     if (key === 'kabaddi') { ctx.strokeStyle = '#fff'; ctx.lineWidth = 4; ctx.beginPath(); Lines(ctx, c).seg(.5, 0, .5, 1); ctx.stroke(); }
   }
   function pool(ctx, c, t, n) {
@@ -251,7 +282,8 @@
   function fig(ctx, x, y, k, o) {
     var f = o.face || 1, p = o.pose || POSE.stand, s = k, front = !!o.front;
     ctx.save(); ctx.translate(x, y); if (o.alpha != null) ctx.globalAlpha = o.alpha;
-    ctx.fillStyle = 'rgba(0,0,0,.22)'; ctx.beginPath(); ctx.ellipse(0, 0, 13 * s, 3.4 * s, 0, 0, TAU); ctx.fill();
+    var sh = ctx.createRadialGradient(2 * s, 0, 0, 2 * s, 0, 15 * s); sh.addColorStop(0, 'rgba(0,0,0,.34)'); sh.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = sh; ctx.beginPath(); ctx.ellipse(2 * s, 0, 15 * s, 4 * s, 0, 0, TAU); ctx.fill();
     ctx.translate(0, -(o.lift || 0) * s);
     if (o.rot) ctx.rotate(o.rot * f);
     var T = 14 * s, SH = 14 * s, UA = 10.5 * s, FA = 10 * s, TOR = 19 * s;

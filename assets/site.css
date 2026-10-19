@@ -116,6 +116,52 @@ a { color: var(--royal); }
 @media (max-width: 620px) { .ribbon-cta .btn { font-size: 1.05rem; padding: 17px 22px; } }
 .ribbon-cta .btn span { display: inline-block; transition: transform .25s; }
 .ribbon-cta .btn:hover span { transform: translateX(5px); }
+.sport-pick { position: relative; display: inline-flex; align-items: center; gap: 16px 22px; flex-wrap: wrap; justify-content: center;
+  padding: 20px 20px 20px 30px; border-radius: 24px; color: #fff; text-align: left;
+  background: radial-gradient(120% 140% at 0% 0%, #4f72ff 0%, #2f4fd1 45%, #1d2f8f 100%);
+  box-shadow: 0 26px 50px -24px rgba(29,47,143,.75), inset 0 1px 0 rgba(255,255,255,.18); }
+.sp-label { font: 800 1.35rem var(--display); letter-spacing: .01em; color: #fff; }
+.sp-row { display: flex; gap: 12px; align-items: stretch; }
+.sp-dd { position: relative; }
+.sp-trigger { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-width: 280px; height: 100%;
+  padding: 15px 18px; border-radius: 14px; cursor: pointer; color: #fff; font: 700 1.1rem var(--body);
+  background: rgba(255,255,255,.14); border: 1.5px solid rgba(255,255,255,.4); transition: background .2s, border-color .2s, box-shadow .2s; }
+.sp-trigger:hover, .sp-trigger[aria-expanded="true"] { background: rgba(255,255,255,.22); border-color: #fff; }
+.sp-trigger:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(255,255,255,.35); }
+.sp-trigger .sp-val { display: inline-flex; align-items: center; gap: 10px; }
+.sp-trigger .sp-val.empty { color: rgba(255,255,255,.82); }
+.sp-trigger svg { width: 20px; height: 20px; fill: none; stroke: #fff; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s; flex: none; }
+.sp-trigger[aria-expanded="true"] svg { transform: rotate(180deg); }
+.sp-list { position: absolute; left: 0; top: calc(100% + 10px); z-index: 30; margin: 0; padding: 8px; list-style: none; width: max(100%, 380px);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4px; border-radius: 16px; background: #1d2f8f;
+  border: 1px solid rgba(255,255,255,.18); box-shadow: 0 24px 50px -16px rgba(10,15,44,.7); }
+.sp-list[hidden] { display: none; }
+.sp-list li { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 11px; cursor: pointer;
+  color: #fff; font: 700 1.04rem var(--body); outline: none; transition: background .15s; }
+.sp-list li:hover, .sp-list li:focus { background: rgba(255,255,255,.14); }
+.sp-list li[aria-selected="true"] { background: rgba(255,255,255,.22); }
+.sp-list li[aria-selected="true"]::after { content: "✓"; margin-left: auto; font-weight: 800; color: #00ff88; }
+.sp-ico { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; font-size: 1.3rem; background: rgba(255,255,255,.12); flex: none; }
+.sp-trigger .sp-ico { width: 30px; height: 30px; font-size: 1.1rem; }
+.sp-go { padding: 15px 30px; border-radius: 14px; border: 0; cursor: pointer; font: 800 1.1rem var(--body); color: #1d2f8f;
+  background: #fff; box-shadow: 0 10px 22px -10px rgba(0,0,0,.45); transition: transform .15s, box-shadow .15s; white-space: nowrap; }
+.sp-go:hover { transform: translateY(-2px); box-shadow: 0 14px 26px -10px rgba(0,0,0,.5); }
+.sp-go:active { transform: scale(.97); }
+.sport-pick.nudge .sp-trigger { border-color: var(--sun); animation: spShake .35s; }
+@keyframes spShake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+#sports.ribbon-cta { display: flex; flex-direction: column; align-items: center; padding: 0 16px; }
+.ribbon #sports .sport-pick-note { margin: 16px auto 0; max-width: 52ch; color: var(--muted); font-size: .95rem; font-weight: 500; letter-spacing: 0; text-transform: none; text-align: center; }
+@media (max-width: 760px) {
+  .sport-pick { display: flex; flex-direction: column; align-items: stretch; gap: 14px; padding: 20px 18px; width: 100%; text-align: center; }
+  .sp-row { flex-direction: column; gap: 10px; }
+  .sp-trigger { min-width: 0; width: 100%; }
+  .sp-list { width: 100%; grid-template-columns: 1fr 1fr; }
+  .sp-list li { padding: 11px 10px; gap: 9px; font-size: .98rem; }
+  .sp-ico { width: 32px; height: 32px; font-size: 1.15rem; }
+  .sp-go { width: 100%; }
+}
+.nav-sport { font: 600 .95rem var(--body); color: #fff; background: rgba(255,255,255,.08) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center; border: 1px solid rgba(255,255,255,.2); border-radius: 10px; padding: 8px 30px 8px 12px; appearance: none; -webkit-appearance: none; cursor: pointer; }
+.nav-sport option { color: #0a0f2c; }
 a.sport { text-decoration: none; transition: transform .2s, box-shadow .2s; }
 a.sport:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 2px var(--royal); }
 .sport { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 12px; white-space: nowrap; background: #fff; box-shadow: inset 0 0 0 1px var(--line); font-weight: 700; color: var(--night-3); }
@@ -401,6 +447,7 @@ footer.site .addr { font-size: .94rem; line-height: 1.6; }
 
 
 /* ── Dark mode (toggle in the nav; light stays the default) ─────────── */
+html, body { overflow-x: clip; }
 :root { --card: #fff; --ink: var(--night); }
 :root[data-theme="dark"] { color-scheme: dark; --bg: #0b1024; --bg-2: #0f1634; --text: #e3e7f8; --muted: #a2abd2; --line: #252f62; --card: #141b3e; --ink: #f2f4ff; --shadow: 0 26px 60px -30px rgba(0,0,0,.85); }
 [data-theme="dark"] .sport, [data-theme="dark"] .card, [data-theme="dark"] .tabs, [data-theme="dark"] .demo-box, [data-theme="dark"] .step,
@@ -471,6 +518,7 @@ footer.site .addr { font-size: .94rem; line-height: 1.6; }
   .nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--night); padding: 8px 16px 18px; border-bottom: 1px solid rgba(255,255,255,.08); }
   .nav-links.open { display: flex; }
   .nav-links a { padding: 13px 4px; border-bottom: 1px solid rgba(255,255,255,.06); }
+  .nav-links .nav-sport { margin: 10px 0 4px; padding: 12px 34px 12px 12px; }
   .nav-links .btn { margin-top: 12px; }
   .menu-btn { display: block; }
   .theme-btn { margin-left: auto; }

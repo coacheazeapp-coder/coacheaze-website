@@ -151,6 +151,12 @@
 [data-theme="dark"] .fee-row.paid { background: rgba(20,198,180,.18); }
 [data-theme="dark"] .fee-row.paid small { color: #5eead4; }
 
+
+/* Small CoachEaze mark in the corner of each game */
+.ce-badge { position: absolute; right: 8px; bottom: 8px; width: 26px; height: 26px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,.35); pointer-events: none; z-index: 2; opacity: .92; }
+.pphone .ce-badge { right: 12px; bottom: 12px; }
+.court, .scene, .fee-panel { position: relative; }
+
 @media (max-width: 900px) {
   .s-hero-grid, .s-block, .s-block.rev, .rate-wrap, .mcalc { grid-template-columns: 1fr; }
   .fee-list { grid-template-columns: 1fr 1fr; }
