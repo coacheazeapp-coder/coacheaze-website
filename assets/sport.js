@@ -1,4 +1,4 @@
-// Sport landing pages: roll call, rate a player, with/without story, mini calculator.
+// Sport landing pages: roll call, fee day, with/without story, mini calculator.
 (function () {
   var S = window.SPORT || {};
   var sleep = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
@@ -44,38 +44,83 @@
     });
   }
 
-  // Rate a player: stars push a live note to the parent's phone
-  var skillsEl = document.getElementById('skills'), notes = document.getElementById('notes');
-  if (skillsEl && notes) {
-    var vals = (S.skills || []).map(function (_, i) { return [3, 2, 4, 3, 2][i % 5]; }), badgeShown = false;
-    var avgEl = document.getElementById('avg'), badge = document.getElementById('badge');
-    var draw = function () {
-      skillsEl.querySelectorAll('.skill').forEach(function (row, i) {
-        row.querySelectorAll('button').forEach(function (b, j) { b.classList.toggle('lit', j < vals[i]); });
+  // Fee Day Rush: parents pay in cash/UPI, coach ticks who paid, one tap marks them all
+  var feeList = document.getElementById('feeList'), feeGo = document.getElementById('feeGo');
+  if (feeList && feeGo) {
+    var FEE = S.fee || 3500, fmt = function (n) { return '₹' + n.toLocaleString('en-IN'); };
+    var names = (S.players || []).slice(0, 8), hero = S.player || names[0];
+    var state = names.map(function () { return 'due'; });          // due | came | paid
+    var ticked = {}, started = false, t0 = 0, timers = [];
+    var fs = document.getElementById('feeStatus'), got = document.getElementById('feeGot'),
+        due = document.getElementById('feeDue'), bar = document.getElementById('feeBar'),
+        pst = document.getElementById('feePst'), pdate = document.getElementById('feeDate');
+    var rows = names.map(function (n, i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'fee-row';
+      b.innerHTML = n + '<small>' + fmt(FEE) + ' due</small>'; b.dataset.i = i; feeList.appendChild(b); return b;
+    });
+    var totals = function () {
+      var paid = state.filter(function (s) { return s === 'paid'; }).length;
+      got.textContent = fmt(paid * FEE); due.textContent = fmt((names.length - paid) * FEE);
+      bar.style.width = (paid / names.length * 100) + '%';
+    };
+    var nTicked = function () { return Object.keys(ticked).length; };
+    var over = function () { return started && timers.length === 0 && state.indexOf('came') < 0; };
+    var label = function () {
+      var k = nTicked();
+      feeGo.textContent = k ? '✅ Mark ' + k + ' paid' : over() ? '↻ Play again' : (started ? 'Tick who paid ↑' : '▶ Start fee day');
+      feeGo.disabled = started && !k && !over();
+    };
+    var reset = function () {
+      state = names.map(function () { return 'due'; }); ticked = {}; started = false;
+      rows.forEach(function (r) { r.className = 'fee-row'; r.querySelector('small').textContent = fmt(FEE) + ' due'; });
+      pst.textContent = 'Due'; pst.classList.remove('ok'); pdate.textContent = 'Pay at the academy';
+      feeGo.classList.remove('used'); say('', names.length + ' parents owe this month\'s fee.'); totals(); label();
+    };
+    var say = function (cls, txt) { fs.className = 's-status' + (cls ? ' ' + cls : ''); fs.textContent = txt; };
+    feeList.addEventListener('click', function (e) {
+      var r = e.target.closest('.fee-row'); if (!r) return; var i = +r.dataset.i;
+      if (!started) { say('warn', 'Tap “Start fee day” first — then parents start paying.'); return; }
+      if (state[i] === 'paid') return;
+      if (state[i] === 'due') { say('warn', names[i] + ' hasn’t paid yet. Only tick parents who paid.'); return; }
+      if (ticked[i]) { delete ticked[i]; r.classList.remove('tick'); } else { ticked[i] = 1; r.classList.add('tick'); }
+      label();
+    });
+    feeGo.addEventListener('click', function () {
+      if (over() && !nTicked()) { reset(); return; }
+      if (!started) {
+        started = true; t0 = performance.now(); feeGo.classList.add('used'); label();
+        say('', '💬 Parents are paying at the desk… tick each one who paid.');
+        // 6 of 8 pay, the hero player first so the parent's phone flips.
+        var order = [0].concat(names.map(function (_, i) { return i; }).slice(1).sort(function () { return Math.random() - .5; })).slice(0, 6);
+        order.forEach(function (i, k) {
+          var t = setTimeout(function () {
+            timers.splice(timers.indexOf(t), 1);
+            if (state[i] !== 'due') return; state[i] = 'came';
+            rows[i].classList.add('came');
+            rows[i].querySelector('small').textContent = (k % 2 ? 'Cash' : 'UPI') + ' · paid — tick me';
+            label();
+          }, 500 + k * 900);
+          timers.push(t);
+        });
+        return;
+      }
+      var idx = Object.keys(ticked).map(Number); if (!idx.length) return;
+      idx.forEach(function (i) {
+        state[i] = 'paid'; rows[i].classList.remove('tick', 'came'); rows[i].classList.add('paid');
+        rows[i].querySelector('small').textContent = 'Paid ✓';
+        if (names[i] === hero) {
+          pst.textContent = 'Paid ✓'; pst.classList.add('ok');
+          var d = new Date(); pdate.textContent = 'Paid on ' + d.getDate() + ' ' + d.toLocaleString('en-IN', { month: 'short' });
+        }
       });
-      var a = vals.reduce(function (x, y) { return x + y; }, 0) / vals.length;
-      avgEl.textContent = a.toFixed(1) + ' / 5';
-      if (a >= 4 && !badgeShown) { badgeShown = true; badge.classList.add('show'); push('🏅 <b>' + S.player + '</b> unlocked the <b>' + S.badge + '</b> badge!'); }
-    };
-    var push = function (html) {
-      var d = document.createElement('div'); d.className = 'pnote';
-      d.innerHTML = html + '<small>CoachEaze · just now</small>';
-      notes.insertBefore(d, notes.firstChild);
-      while (notes.children.length > 4) notes.removeChild(notes.lastChild);
-    };
-    (S.skills || []).forEach(function (s, i) {
-      var row = document.createElement('div'); row.className = 'skill';
-      var st = '<div class="stars">';
-      for (var j = 1; j <= 5; j++) st += '<button type="button" aria-label="' + s + ' ' + j + ' of 5" data-i="' + i + '" data-v="' + j + '">★</button>';
-      row.innerHTML = '<span>' + s + '</span>' + st + '</div>';
-      skillsEl.appendChild(row);
+      ticked = {}; totals(); label();
+      var paid = state.filter(function (s) { return s === 'paid'; }).length, left = names.length - paid,
+          waiting = state.filter(function (s) { return s === 'came'; }).length;
+      if (waiting) say('good', idx.length + ' marked paid in one tap. ' + waiting + ' more paid — tick them too.');
+      else if (left) say('good', '✓ ' + paid + ' of ' + names.length + ' paid in ' + ((performance.now() - t0) / 1000).toFixed(0) + ' s. ' + left + ' still due — they see “Due” in their app, so no awkward calls.');
+      else say('good', '🎉 Everyone paid. Revenue is up to date.');
     });
-    skillsEl.addEventListener('click', function (e) {
-      var b = e.target.closest('button'); if (!b) return;
-      var i = +b.dataset.i, v = +b.dataset.v, up = v > vals[i]; vals[i] = v; draw();
-      push((up ? '📈 ' : '⭐ ') + S.player + '’s <b>' + S.skills[i] + '</b> rated <b>' + v + '/5</b> by Coach ' + S.coach + '.');
-    });
-    draw();
+    totals(); label();
   }
 
   // Story: without / with CoachEaze

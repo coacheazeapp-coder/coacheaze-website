@@ -91,20 +91,22 @@
 <section style="background:linear-gradient(180deg,var(--bg-2),var(--bg))">
   <div class="wrap s-block rev">
     <div class="s-copy reveal">
-      <span class="kicker">Try it · Progress</span>
-      <h2>Rate a player. <em>Parents see it live.</em></h2>
-      <p>Tap the stars like Coach Harpreet would after practice. Every rating lands on the parent's phone, and badges unlock as players improve. Push the average to 4 and see what happens.</p>
+      <span class="kicker">Try it · Fees</span>
+      <h2>Fee day. <em>Marked in one tap.</em></h2>
+      <p>Parents pay Coach Harpreet in cash and UPI all evening. Tick everyone who paid and mark them all at once. Collected and pending add up by themselves, and each parent sees their fee status in the app. Start fee day and keep up!</p>
     </div>
     <div class="panel reveal d1">
       <div class="rate-wrap">
         <div>
-          <div class="player"><span class="av">G</span><div><b>Gurveer</b><small>U-15 Squad · Coach Harpreet</small></div></div>
-          <div id="skills"></div>
-          <div class="avg">Average <em id="avg">0</em></div>
-          <div class="badge-pop" id="badge">🏅 Drag Flick Pro badge unlocked!</div>
+          <div class="fee-top"><div><small>Collected</small><b id="feeGot">₹0</b></div><div class="due"><small>Still due</small><b id="feeDue">₹0</b></div></div>
+          <div class="fee-bar"><i id="feeBar"></i></div>
+          <div class="fee-list" id="feeList"></div>
+          <button class="btn btn-play fee-go" id="feeGo" type="button">▶ Start fee day</button>
+          <div class="s-status" id="feeStatus">8 parents owe this month's fee.</div>
         </div>
-        <div class="pphone"><div class="notch"></div><div class="ph-title">Parent's phone</div><div id="notes"><div class="pnote">👋 Welcome! Gurveer's progress shows up here.<small>CoachEaze</small></div></div></div>
+        <div class="pphone"><div class="notch"></div><div class="ph-title">Gurveer's parent · app</div><div class="pcard"><small>This month's fee</small><b>₹3,500</b><span class="st" id="feePst">Due</span><div id="feeDate" style="font-size:.72rem;color:rgba(255,255,255,.55);margin-top:6px">Pay at the academy</div></div><div class="pnote">💡 Parents see Paid or Due here, so nobody has to chase anyone.<small>CoachEaze</small></div></div>
       </div>
+    </div>
     </div>
   </div>
 </section>
